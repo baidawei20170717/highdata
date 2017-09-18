@@ -1,0 +1,129 @@
+body{background:url(../img/s-bg.jpg) center 0 no-repeat;background-size:cover;}
+.text-fa9a2a{color: #fa9a2a;}
+.text-e95658{color: #e95658;}
+.text-81bd51{color:#81bd51;}
+.text-76d4f2{color: #76d4f2;}
+.text-ffffff{color: #fff;}
+.text-52dabd{color:#52dabd;}
+.text-76d4f2{color:#76d4f2;}
+
+.text-size12{font-size: 12px;}
+.text-size14{font-size: 14px;}
+.text-size16{font-size: 16px;}
+.text-size18{font-size: 18px;}
+.text-size20{font-size: 20px;}
+.text-size60{font-size: 60px;}
+
+.layer-mb20{margin-bottom: 20px;}
+
+
+.skin-blue .main-header .logo:hover{background: #001335;}
+.main-header .logo{font-size: 18px;color: #000;}
+.main-header{border-bottom: 1px solid #2476ce;}
+.skin-blue .main-header .logo,
+.skin-blue .main-sidebar{border-right: 1px solid #2476ce;}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side,
+.content-wrapper, .right-side{background: none;}
+.skin-blue .wrapper{background:url(../img/s-bg-repeat.png) 0 0 repeat;border: 1px solid #2476ce;}
+.skin-blue .main-header .navbar,
+.skin-blue .main-sidebar{background: rgba(3,31,80,.7);}
+.skin-blue .main-header .logo,
+.skin-blue .main-header li.user-header{background: #001335;}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a{background: #001335;}
+.sidebar-menu li.active>a>.fa-angle-right, 
+.sidebar-menu li.active>a>.pull-right-container>.fa-angle-right{
+	-webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.content-header>h1,
+.breadcrumb>.active{color: #fff;}
+.content-header>.breadcrumb>li>a{color: #999;}
+.skin-blue .sidebar-form{margin: 0;}
+.control-sidebar-dark, .control-sidebar-dark+.control-sidebar-bg{display: none;}
+
+.row-base-style{position: relative;background: rgba(3,31,80,.7);margin: 15px 0 0;color: #fff !important;}
+.row-base-style .left-icon,
+.row-base-style .right-icon{position: absolute;left: 0;top: 0;bottom: 0;content: '';width: 10px;border-top: 1px solid #4ac5e9;border-bottom: 1px solid #4ac5e9;}
+.row-base-style .right-icon{right: 0;left: auto;top: 0;bottom: 0;border-left: none;}
+.row-base-style .left-icon:after,
+.row-base-style .left-icon:before,
+.row-base-style .right-icon:before,
+.row-base-style .right-icon:after{content:'';position: absolute;top: 0;left: 0;border-left: 1px solid #4ac5e9;height: 10px;}
+.row-base-style .right-icon:before,
+.row-base-style .right-icon:after{border-left: none;right: 0;left: auto;border-right: 1px solid #4ac5e9;}
+.row-base-style .left-icon:after,
+.row-base-style .right-icon:after{top: auto;bottom: 0;}
+
+.is-info-row .item{height: 100px;line-height: 100px;}
+.is-info-row .item i.fa{margin-right: 10px;font-size: 28px;vertical-align: middle;}
+.is-table-data .item{padding: 20px;}
+.is-table-data .item .box-header{padding: 10px 0;}
+.is-table-data .item .box-title{color: #fff;}
+.is-table-data .item table td,
+.is-table-data .item table th{padding: 10px 5px;border-color: #2d5898;color: #fff;}
+.is-table-data .item table tr:first-child>*{border:none;}
+
+.is-search{padding:10px 15px;margin-top: 0;}
+.is-search .select2{width: 100% !important;}
+.is-search .sidebar-form input[type="text"]{background: none;}
+.is-search .sidebar-form{border: none;}
+.is-search .sidebar-form .btn{background: none;color: #888;}
+.is-search .select2-container--default .select2-selection--single, 
+.is-search .select2-selection .select2-selection--single{background: none;border: none;color: #fff;}
+.is-search .select2-container--default .select2-selection--single .select2-selection__rendered{color: #fff;}
+.is-search .row .col-lg-3{border-right: 1px solid #ccc;}
+.sidebar-mini.sidebar-collapse .is-search .sidebar-form{display: block !important;}
+
+
+.is-progress{padding-left: 40px;}
+.is-progress .progress-bar{line-height: 16px;}
+.is-progress .progress{position: relative;background: #001335;border-radius: 10px;height: 16px;margin-bottom: 15px;}
+.is-progress .label{float: left;width: 40px;margin-left: -40px;white-space: nowrap;text-align: left;line-height: 16px;padding: 0;}
+
+/*强制设置图表宽度为100%*/
+.highcharts-container ,.highcharts-root{width: 100% !important;}
+
+/*性能监控-主机监控列表*/
+.xn-zj-list{margin-top: 20px;}
+.xn-zj-list .box{background: rgba(3,31,80,.7);border: 1px solid #2476ce;border-radius: 0;}
+.xn-zj-list .box-header{padding-top: 20px;}
+.xn-zj-list .sr-only{width: auto;height: auto;clip:auto;margin: 0;left: 20px;}
+
+/*性能监控-网络设备列表*/
+.xn-wlsb-list{margin-top: 20px;}
+.xn-wlsb-list .box{background: rgba(3,31,80,.7);border: 1px solid #2476ce;border-radius: 0;}
+.xn-wlsb-list .box-header{padding-top: 20px;}
+.xn-wlsb-list .box-body{color: #b7d0ef;}
+.xn-wlsb-list .box-body p{margin-bottom: 0;}
+.xn-wlsb-list .box-body .fa-plus-circle {-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+-o-transform: rotate(45deg);
+transform: rotate(45deg);}
+.xn-wlsb-list .sr-only{width: auto;height: auto;clip:auto;margin: 0;left: 20px;}
+
+
+/*登录页*/
+.login-page{background:url(../img/login-bg.jpg) center center no-repeat;-webkit-background-size: cover; background-size: cover;}
+.is-login{width: 360px;height: 445px;margin:-225px 0 0 100px ;padding:30px 40px 0 35px;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;position: absolute;left: 50%;top: 50%;background: url(../img/login-bg2.png) 0 0 no-repeat;-webkit-background-size: cover; background-size: cover;}
+.is-login .login-box-body{background: none;}
+.is-login .form-control{background: #4165bc;border: 1px solid #8eafff;color:#fff;padding-right: 12;padding-left: 36px;}
+.is-login .form-control-feedback{color: #fff;left: 0;right: auto;}
+.is-login .btn{background: #496de3;color: #fff;outline: none !important;border: none;}
+.is-login .login-logo{padding-top: 40px;}
+.is-login .login-logo img{margin-bottom: 10px;}
+
+/*bootstrip switch style reset*/
+.top-search-switch-btn{padding: 14px 15px 0 0;}
+.bootstrap-switch{border-radius: 15px;}
+.bootstrap-switch.bootstrap-switch-on{border-color: #3c99dc;}
+.bootstrap-switch.bootstrap-switch-off{border-color: #999;}
+.bootstrap-switch .bootstrap-switch-label{background: none;}
+.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-off, 
+.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-handle-on, 
+.bootstrap-switch.bootstrap-switch-mini .bootstrap-switch-label{text-indent:-200px;width: 20px;}
+.bootstrap-switch .bootstrap-switch-handle-on,
+.bootstrap-switch .bootstrap-switch-handle-off{border-radius: 15px;}
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default, 
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default{background: #999;}
