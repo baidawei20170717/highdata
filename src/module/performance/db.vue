@@ -60,9 +60,7 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </router-link>
       </div>
     </div>
