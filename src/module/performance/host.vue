@@ -14,16 +14,15 @@
             <div class="right-icon"></div>
             <div class="row">
                 <div class="col-lg-3 col-xs-6">
-                    <select v-model="orderField" class="form-control select2">
-                        <option v-for="item in orderFields" :value="item.key">{{item.value}}</option>
+                    <select v-model="orderField.selected" v-select2='orderField.options' class="form-control select2">
                     </select>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-                    <select v-model="orderBy" class="form-control select2">
-                        <option v-for="item in orderBys" :value="item.key">{{item.value}}</option>
+                    <select v-model="orderBy.selected" v-select2='orderBy.options' class="form-control select2">
                     </select>
                 </div>
                 <div class="col-lg-3 col-xs-6">
+<<<<<<< HEAD
                   <div class="form-group" style="margin-bottom: 0;">
                     <input type="text" class="form-control" placeholder="Enter ...">
                   </div>
@@ -32,6 +31,18 @@
                     <div class="sidebar-form">
                         <div class="input-group">
                             <input v-model="filterIp" type="text" name="q" class="form-control" placeholder="请输入筛选IP">
+=======
+                  <div class="sidebar-form">
+                    <div class="input-group">
+                      <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="*">
+>>>>>>> b0f111ee8e27401cd5bdd3ad4b8ecea71a1485b4
                             <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                         </div>
                     </div>
@@ -40,7 +51,7 @@
         </div>
         <div class="xn-zj-list">
             <div class="row">
-                <router-link :to="{name: 'host_single', params: {id: item.ip}}" v-for="item in Items" class="col-lg-3 col-xs-12">
+                <router-link :to="{name: 'host_single', params: {id: item.ip}}" v-for="item in ItemsByOrder" class="col-lg-3 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-header text-center">
                             <h3 class="box-title text-ffffff">{{ item.ip }}</h3>
@@ -80,6 +91,7 @@
 </div>
 </template>
 <script type="es6">
+import _ from 'lodash'
 export default {
   name: 'host',
   created (){
@@ -94,22 +106,29 @@ export default {
         })
   },
   mounted (){
-    $('.is-search').find('.select2').select2();
   },
   data (){
     return {
-      orderField: 'cpu',
-      orderBy: 'desc',
+      orderField:{
+        selected:'cpu',
+        options:{
+          data:[
+            {id:'cpu',text:'CPU使用率'},
+            {id:'memory',text:'内存使用率'},
+            {id:'swap',text:'SWAP使用率'}
+          ]
+        }
+      },
+      orderBy:{
+        selected:'desc',
+        options:{
+          data:[
+            {id:'desc',text:'倒序'},
+            {id:'asc',text:'升序'}
+          ]
+        }
+      },
       filterIp: '',
-      orderFields :[
-        {key: 'cpu', value: 'CPU使用率'},
-        {key: 'memory', value: '内存使用率'},
-        {key: 'swap', value: 'SWAP使用率'}
-      ],
-      orderBys : [
-        {key: 'desc', value: '倒序'},
-        {key: 'asc', value: '升序'}
-      ],
       Items: null
     }
   },
@@ -124,6 +143,27 @@ export default {
   				}).then(function(data){
 
           })
+    }
+  },
+  computed:{
+    ItemsByOrder () {
+      let self = this
+      return _.sortBy(this.Items,function(item){
+        if(self.orderBy.selected == 'desc'){
+          return -item[self.orderField.selected]
+        }else{
+          return item[self.orderField.selected]
+        }
+      })
+    }
+  },
+  watch:{
+    filterIp : function(val,oldVal){
+      let ip = this.filterIp
+      return _.filter(this.Items, function(item){
+        console.log(item)
+            return item.ip.indexOf('10.1.6.211') >= 0;
+      })
     }
   }
 }
