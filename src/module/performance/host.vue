@@ -23,11 +23,15 @@
                         <option v-for="item in orderBys" :value="item.key">{{item.value}}</option>
                     </select>
                 </div>
-                <div class="col-lg-6 col-xs-12">
+                <div class="col-lg-3 col-xs-6">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                  </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
                     <div class="sidebar-form">
                         <div class="input-group">
                             <input v-model="filterIp" type="text" name="q" class="form-control" placeholder="请输入筛选IP">
-                            <input value='*' />
                             <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                         </div>
                     </div>
