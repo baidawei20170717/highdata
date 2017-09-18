@@ -27,6 +27,7 @@
                     <div class="sidebar-form">
                         <div class="input-group">
                             <input v-model="filterIp" type="text" name="q" class="form-control" placeholder="请输入筛选IP">
+                            <input value='*' />
                             <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                         </div>
                     </div>
