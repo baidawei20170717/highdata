@@ -188,8 +188,6 @@
   import XChart from '@/components/chat'
   export default {
     name: 'host_single',
-    mounted (){
-    },
     data() {
     let cpu_option = {
     chart: {

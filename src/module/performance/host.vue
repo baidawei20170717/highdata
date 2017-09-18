@@ -141,10 +141,10 @@ export default {
   },
   watch:{
     orderFieldSelected : function(val,oldVal){
-      this.selectOrder
+      this.selectOrder()
     },
     orderBySelected : function(val,oldVal){
-      this.selectOrder
+      this.selectOrder()
     }
   }
 }
