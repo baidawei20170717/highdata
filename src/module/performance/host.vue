@@ -22,7 +22,6 @@
                     </select>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-<<<<<<< HEAD
                   <div class="form-group" style="margin-bottom: 0;">
                     <input type="text" class="form-control" placeholder="Enter ...">
                   </div>
@@ -31,18 +30,6 @@
                     <div class="sidebar-form">
                         <div class="input-group">
                             <input v-model="filterIp" type="text" name="q" class="form-control" placeholder="请输入筛选IP">
-=======
-                  <div class="sidebar-form">
-                    <div class="input-group">
-                      <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="*">
->>>>>>> b0f111ee8e27401cd5bdd3ad4b8ecea71a1485b4
                             <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                         </div>
                     </div>
