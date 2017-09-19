@@ -14,11 +14,11 @@
             <div class="right-icon"></div>
             <div class="row">
                 <div class="col-lg-3 col-xs-6">
-                    <select v-model="orderField.selected" v-select2='orderField.options' class="form-control select2">
+                    <select v-model="orderFieldSelected" v-select2='orderFieldOptions' class="form-control select2">
                     </select>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-                    <select v-model="orderBy.selected" v-select2='orderBy.options' class="form-control select2">
+                    <select v-model="orderBySelected" v-select2='orderBySptions' class="form-control select2">
                     </select>
                 </div>
                 <div class="col-lg-3 col-xs-6">
@@ -29,7 +29,7 @@
                 <div class="col-lg-3 col-xs-12">
                     <div class="sidebar-form">
                         <div class="input-group">
-                            <input v-model="filterIp" type="text" name="q" class="form-control" placeholder="请输入筛选IP">
+
                             <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="xn-zj-list">
             <div class="row">
-                <router-link :to="{name: 'host_single', params: {id: item.ip}}" v-for="item in ItemsByOrder" class="col-lg-3 col-xs-12">
+                <router-link :to="{name: 'host_single', params: {id: item.ip}}" v-for="item in ItemsByFilter" class="col-lg-3 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-header text-center">
                             <h3 class="box-title text-ffffff">{{ item.ip }}</h3>
@@ -71,7 +71,6 @@
                         </div>
                     </div>
                 </router-link>
-
             </div>
         </div>
     </section>
@@ -82,75 +81,68 @@ import _ from 'lodash'
 export default {
   name: 'host',
   created (){
-    this.Items = [{"memory":0.9881666666666667,"swap":0.123,"ip":"10.1.33.1","cpu":2.19,"type":"linux"},{"memory":0.5508000000000001,"swap":0.3420666666666667,"ip":"10.1.5.1","cpu":0.2742666666666667,"type":"windows"},{"memory":0.2383076923076923,"swap":0.0,"ip":"10.1.5.3","cpu":0.078,"type":"linux"},{"memory":0.990375,"swap":0.083,"ip":"10.1.5.4","cpu":0.7483749999999999,"type":"linux"},{"memory":0.9904285714285714,"swap":0.09,"ip":"10.1.5.5","cpu":0.7864285714285714,"type":"linux"},{"memory":0.99025,"swap":0.11800000000000001,"ip":"10.1.5.6","cpu":1.4957500000000001,"type":"linux"},{"memory":0.9470000000000002,"swap":0.481,"ip":"10.1.58.10","cpu":1.0352,"type":"windows"},{"memory":0.36593333333333333,"swap":0.185,"ip":"10.1.58.19","cpu":0.0033333333333333335,"type":"windows"},{"memory":0.19,"swap":0.096,"ip":"10.1.58.20","cpu":0.002,"type":"windows"},{"memory":0.19746666666666668,"swap":0.09346666666666664,"ip":"10.1.58.21","cpu":0.0020666666666666667,"type":"windows"},{"memory":0.339,"swap":0.17300000000000001,"ip":"10.1.6.111","cpu":0.12783333333333333,"type":"windows"},{"memory":0.8520000000000001,"swap":0.516,"ip":"10.1.6.116","cpu":0.05153333333333333,"type":"windows"},{"memory":0.5834666666666666,"swap":0.3363333333333334,"ip":"10.1.6.117","cpu":0.0814,"type":"windows"},{"memory":0.1392666666666667,"swap":0.07913333333333333,"ip":"10.1.6.139","cpu":0.10226666666666666,"type":"windows"},{"memory":0.098,"swap":0.09446666666666666,"ip":"10.1.6.15","cpu":0.05686666666666666,"type":"windows"},{"memory":0.5173846153846153,"swap":0.29307692307692307,"ip":"10.1.6.152","cpu":0.6288461538461539,"type":"windows"},{"memory":0.20299999999999999,"swap":0.11400000000000003,"ip":"10.1.6.154","cpu":0.0594,"type":"windows"},{"memory":0.8909333333333334,"swap":0.0,"ip":"10.1.6.164","cpu":0.5725333333333334,"type":"linux"},{"memory":0.962,"swap":0.0,"ip":"10.1.6.171","cpu":0.0483,"type":"linux"},{"memory":0.732,"swap":0.0,"ip":"10.1.6.172","cpu":0.03809090909090909,"type":"linux"},{"memory":0.5002,"swap":0.2861333333333333,"ip":"10.1.6.175","cpu":0.0274,"type":"windows"},{"memory":0.795,"swap":0.20099999999999998,"ip":"10.1.6.176","cpu":0.02393333333333333,"type":"linux"},{"memory":0.984,"swap":0.048,"ip":"10.1.6.177","cpu":0.9924666666666667,"type":"linux"},{"memory":0.45213333333333333,"swap":0.06099999999999999,"ip":"10.1.6.189","cpu":0.41159999999999997,"type":"linux"},{"memory":0.995,"swap":0.082,"ip":"10.1.6.191","cpu":0.02006896551724138,"type":"linux"},{"memory":0.4356666666666667,"swap":0.0,"ip":"10.1.6.192","cpu":0.38433333333333336,"type":"linux"},{"memory":0.08200000000000002,"swap":0.04100000000000001,"ip":"10.1.6.2","cpu":0.001666666666666667,"type":"windows"},{"memory":0.15399999999999997,"swap":0.08719999999999999,"ip":"10.1.6.202","cpu":0.02026666666666667,"type":"windows"},{"memory":0.2998,"swap":0.0,"ip":"10.1.6.203","cpu":0.010133333333333333,"type":"linux"},{"memory":0.9626,"swap":0.033,"ip":"10.1.6.204","cpu":0.012733333333333334,"type":"linux"},{"memory":0.15313333333333334,"swap":0.09013333333333333,"ip":"10.1.6.206","cpu":0.004066666666666666,"type":"windows"},{"memory":0.8547999999999999,"swap":0.0,"ip":"10.1.6.208","cpu":0.013733333333333335,"type":"linux"},{"memory":0.39764285714285713,"swap":0.22435714285714287,"ip":"10.1.6.209","cpu":0.013571428571428571,"type":"windows"},{"memory":0.3321333333333333,"swap":0.18000000000000002,"ip":"10.1.6.211","cpu":8.009866666666667,"type":"windows"},{"memory":0.3449285714285715,"swap":0.21300000000000002,"ip":"10.1.6.212","cpu":0.10364285714285715,"type":"windows"},{"memory":0.9841666666666665,"swap":0.04900000000000001,"ip":"10.1.6.216","cpu":0.004916666666666667,"type":"linux"},{"memory":0.15073333333333333,"swap":0.084,"ip":"10.1.6.217","cpu":0.014733333333333333,"type":"windows"},{"memory":0.106,"swap":0.0,"ip":"10.1.6.218","cpu":0.0032000000000000006,"type":"linux"},{"memory":0.586,"swap":0.0,"ip":"10.1.6.221","cpu":0.006800000000000001,"type":"linux"},{"memory":0.16,"swap":0.0,"ip":"10.1.6.222","cpu":0.013666666666666667,"type":"linux"},{"memory":0.101,"swap":0.0,"ip":"10.1.6.223","cpu":0.004333333333333333,"type":"linux"},{"memory":0.32599999999999996,"swap":0.4968666666666666,"ip":"10.1.6.229","cpu":0.0022,"type":"windows"},{"memory":0.7171333333333333,"swap":0.02,"ip":"10.1.6.230","cpu":0.04986666666666668,"type":"linux"},{"memory":0.9770000000000001,"swap":0.006,"ip":"10.1.6.231","cpu":0.8840666666666668,"type":"linux"},{"memory":0.946,"swap":0.001,"ip":"10.1.6.232","cpu":0.005533333333333334,"type":"linux"},{"memory":0.9599999999999999,"swap":0.001,"ip":"10.1.6.233","cpu":0.005866666666666667,"type":"linux"},{"memory":0.9918,"swap":0.12399999999999999,"ip":"10.1.6.234","cpu":0.03686666666666667,"type":"linux"},{"memory":0.35500000000000004,"swap":0.0,"ip":"10.1.6.235","cpu":0.004153846153846154,"type":"linux"},{"memory":0.8530000000000001,"swap":0.133,"ip":"10.1.6.237","cpu":0.0336,"type":"linux"},{"memory":0.36299999999999993,"swap":0.0,"ip":"10.1.6.238","cpu":0.025,"type":"linux"},{"memory":0.32,"swap":0.17200000000000001,"ip":"10.1.6.240","cpu":0.020384615384615386,"type":"windows"},{"memory":0.111,"swap":0.0,"ip":"10.1.6.241","cpu":0.007133333333333334,"type":"linux"},{"memory":0.49,"swap":0.28400000000000003,"ip":"10.1.6.242","cpu":0.004153846153846155,"type":"windows"},{"memory":0.513,"swap":0.0,"ip":"10.1.6.243","cpu":0.008571428571428572,"type":"linux"},{"memory":0.418,"swap":0.0,"ip":"10.1.6.244","cpu":0.0030000000000000005,"type":"linux"},{"memory":0.442,"swap":0.0,"ip":"10.1.6.245","cpu":0.00375,"type":"linux"},{"memory":0.9620000000000001,"swap":0.0,"ip":"10.1.6.246","cpu":0.048299999999999996,"type":"linux"},{"memory":0.9800000000000001,"swap":0.0,"ip":"10.1.6.248","cpu":0.0035454545454545456,"type":"linux"},{"memory":0.353,"swap":0.20299999999999999,"ip":"10.1.6.43","cpu":0.009466666666666668,"type":"windows"},{"memory":0.5658461538461539,"swap":0.23984615384615388,"ip":"10.1.6.6","cpu":0.03969230769230769,"type":"windows"},{"memory":0.292,"swap":0.16999999999999998,"ip":"10.1.6.80","cpu":0.0032,"type":"windows"},{"memory":0.8951333333333334,"swap":0.5605333333333334,"ip":"10.1.6.81","cpu":0.0511,"type":"windows"},{"memory":0.384,"swap":0.19713333333333338,"ip":"10.1.6.83","cpu":0.16553333333333334,"type":"windows"},{"memory":0.47100000000000003,"swap":0.255,"ip":"10.1.6.84","cpu":0.4782666666666666,"type":"windows"},{"memory":0.4812666666666666,"swap":0.268,"ip":"10.1.6.97","cpu":0.0406,"type":"windows"},{"memory":0.7661428571428571,"swap":0.4100000000000001,"ip":"10.1.77.11","cpu":0.0952142857142857,"type":"windows"},{"memory":0.508,"swap":0.289,"ip":"10.1.77.12","cpu":0.0916153846153846,"type":"windows"}]
-    this.$http.get('performance/host/monitor', {
-					username: this.username,
-					email: this.email,
-					password: this.password,
-					reference: this.reference
-				}).then(function(data){
-
-        })
-  },
-  mounted (){
+    this.search()
   },
   data (){
     return {
-      orderField:{
-        selected:'cpu',
-        options:{
-          data:[
-            {id:'cpu',text:'CPU使用率'},
-            {id:'memory',text:'内存使用率'},
-            {id:'swap',text:'SWAP使用率'}
-          ]
-        }
+      orderFieldSelected:'cpu',
+      orderFieldOptions:{
+        data:[
+          {id:'cpu',text:'CPU使用率'},
+          {id:'memory',text:'内存使用率'},
+          {id:'swap',text:'SWAP使用率'}
+        ]
       },
-      orderBy:{
-        selected:'desc',
-        options:{
-          data:[
-            {id:'desc',text:'倒序'},
-            {id:'asc',text:'升序'}
-          ]
-        }
+      orderBySelected:'desc',
+      orderBySptions:{
+        data:[
+          {id:'desc',text:'倒序'},
+          {id:'asc',text:'升序'}
+        ]
       },
       filterIp: '',
-      Items: null
+      params:{search:'*'},
+      Items: []
     }
   },
   methods:{
+    selectOrder(){
+      let self = this
+      this.Items =  _.sortBy(this.Items,function(item){
+        if(self.orderBySelected == 'desc'){
+          return -item[self.orderFieldSelected]
+        }else{
+          return item[self.orderFieldSelected]
+        }
+      })
+    },
     search (){
-      this.Items = this.Items = [{"memory":0.9881666666666667,"swap":0.123,"ip":"10.1.33.1","cpu":2.19,"type":"linux"}]
-      this.$http.get('performance/host/monitor', {
-  					username: this.username,
-  					email: this.email,
-  					password: this.password,
-  					reference: this.reference
-  				}).then(function(data){
-
-          })
+      this.Items = [{"memory":0.9390000000000001,"swap":0.114,"ip":"10.1.33.1","cpu":2.527,"type":"linux"},{"memory":0.6085999999999999,"swap":0.37399999999999994,"ip":"10.1.5.1","cpu":0.1538,"type":"windows"},{"memory":0.24000000000000002,"swap":0.0,"ip":"10.1.5.3","cpu":0.07761538461538461,"type":"linux"},{"memory":0.99125,"swap":0.163,"ip":"10.1.5.4","cpu":1.6063749999999999,"type":"linux"},{"memory":0.9908571428571429,"swap":0.2521428571428571,"ip":"10.1.5.5","cpu":2.6867142857142854,"type":"linux"},{"memory":0.989375,"swap":0.09199999999999998,"ip":"10.1.5.6","cpu":1.561375,"type":"linux"},{"memory":0.9981333333333333,"swap":0.8581333333333333,"ip":"10.1.58.10","cpu":1.0306,"type":"windows"},{"memory":0.37707142857142856,"swap":0.191,"ip":"10.1.58.19","cpu":0.003428571428571429,"type":"windows"},{"memory":0.115,"swap":0.081,"ip":"10.1.58.20","cpu":0.0016,"type":"windows"},{"memory":0.11999999999999998,"swap":0.063,"ip":"10.1.58.21","cpu":0.0016,"type":"windows"},{"memory":0.342,"swap":0.17400000000000002,"ip":"10.1.6.111","cpu":0.14541666666666667,"type":"windows"},{"memory":0.855,"swap":0.516,"ip":"10.1.6.116","cpu":0.051133333333333336,"type":"windows"},{"memory":0.6150666666666667,"swap":0.34806666666666675,"ip":"10.1.6.117","cpu":0.0924,"type":"windows"},{"memory":0.09526666666666665,"swap":0.048799999999999996,"ip":"10.1.6.139","cpu":0.10433333333333335,"type":"windows"},{"memory":0.09499999999999999,"swap":0.09299999999999999,"ip":"10.1.6.15","cpu":0.0188,"type":"windows"},{"memory":0.5490769230769231,"swap":0.2936153846153846,"ip":"10.1.6.152","cpu":0.7573076923076923,"type":"windows"},{"memory":0.137,"swap":0.07733333333333332,"ip":"10.1.6.154","cpu":0.048266666666666666,"type":"windows"},{"memory":0.7319333333333333,"swap":0.0,"ip":"10.1.6.164","cpu":0.5462000000000001,"type":"linux"},{"memory":0.9613999999999999,"swap":0.0,"ip":"10.1.6.171","cpu":0.048100000000000004,"type":"linux"},{"memory":0.7330000000000001,"swap":0.0,"ip":"10.1.6.172","cpu":0.035,"type":"linux"},{"memory":0.5830000000000001,"swap":0.341,"ip":"10.1.6.175","cpu":0.021666666666666664,"type":"windows"},{"memory":0.8280000000000001,"swap":0.20299999999999999,"ip":"10.1.6.176","cpu":0.020466666666666668,"type":"linux"},{"memory":0.9814,"swap":0.04900000000000001,"ip":"10.1.6.177","cpu":1.0014,"type":"linux"},{"memory":0.9895333333333334,"swap":0.11200000000000002,"ip":"10.1.6.189","cpu":0.43079999999999996,"type":"linux"},{"memory":0.9940344827586205,"swap":0.106,"ip":"10.1.6.191","cpu":0.02017241379310345,"type":"linux"},{"memory":0.45333333333333337,"swap":0.0,"ip":"10.1.6.192","cpu":0.41553333333333337,"type":"linux"},{"memory":0.082,"swap":0.041,"ip":"10.1.6.2","cpu":0.0012857142857142859,"type":"windows"},{"memory":0.1560666666666667,"swap":0.098,"ip":"10.1.6.202","cpu":0.07886666666666667,"type":"windows"},{"memory":0.41500000000000004,"swap":0.0,"ip":"10.1.6.203","cpu":0.0098,"type":"linux"},{"memory":0.981,"swap":0.033,"ip":"10.1.6.204","cpu":0.013066666666666667,"type":"linux"},{"memory":0.131,"swap":0.08600000000000001,"ip":"10.1.6.206","cpu":0.004266666666666667,"type":"windows"},{"memory":0.8655999999999999,"swap":0.0,"ip":"10.1.6.208","cpu":0.014799999999999999,"type":"linux"},{"memory":0.406,"swap":0.23100000000000004,"ip":"10.1.6.209","cpu":0.010357142857142858,"type":"windows"},{"memory":0.3519333333333333,"swap":0.19826666666666667,"ip":"10.1.6.211","cpu":8.045466666666666,"type":"windows"},{"memory":0.3565,"swap":0.22492857142857142,"ip":"10.1.6.212","cpu":0.12478571428571429,"type":"windows"},{"memory":0.988,"swap":0.04700000000000001,"ip":"10.1.6.216","cpu":0.00525,"type":"linux"},{"memory":0.3903333333333333,"swap":0.2,"ip":"10.1.6.217","cpu":0.020800000000000003,"type":"windows"},{"memory":0.10800000000000001,"swap":0.0,"ip":"10.1.6.218","cpu":0.009066666666666667,"type":"linux"},{"memory":0.587,"swap":0.0,"ip":"10.1.6.221","cpu":0.006533333333333333,"type":"linux"},{"memory":0.189,"swap":0.0,"ip":"10.1.6.222","cpu":0.014400000000000001,"type":"linux"},{"memory":0.10600000000000001,"swap":0.0,"ip":"10.1.6.223","cpu":0.004533333333333334,"type":"linux"},{"memory":0.3751333333333333,"swap":0.5110666666666667,"ip":"10.1.6.229","cpu":0.004733333333333334,"type":"windows"},{"memory":0.9884000000000001,"swap":0.024,"ip":"10.1.6.230","cpu":0.09133333333333334,"type":"linux"},{"memory":0.9672666666666667,"swap":0.010000000000000002,"ip":"10.1.6.231","cpu":1.8665333333333336,"type":"linux"},{"memory":0.9618,"swap":0.002,"ip":"10.1.6.232","cpu":0.018133333333333335,"type":"linux"},{"memory":0.9689999999999999,"swap":0.001,"ip":"10.1.6.233","cpu":0.016866666666666665,"type":"linux"},{"memory":0.9869333333333332,"swap":0.1632666666666667,"ip":"10.1.6.234","cpu":0.07213333333333334,"type":"linux"},{"memory":0.35400000000000004,"swap":0.0,"ip":"10.1.6.235","cpu":0.006230769230769231,"type":"linux"},{"memory":0.9923333333333332,"swap":0.131,"ip":"10.1.6.237","cpu":0.033933333333333336,"type":"linux"},{"memory":0.368,"swap":0.0,"ip":"10.1.6.238","cpu":0.010333333333333333,"type":"linux"},{"memory":0.328,"swap":0.176,"ip":"10.1.6.240","cpu":0.014923076923076924,"type":"windows"},{"memory":0.111,"swap":0.0,"ip":"10.1.6.241","cpu":0.007333333333333333,"type":"linux"},{"memory":0.49807692307692314,"swap":0.28807692307692306,"ip":"10.1.6.242","cpu":0.005615384615384616,"type":"windows"},{"memory":0.501,"swap":0.0,"ip":"10.1.6.243","cpu":0.008428571428571428,"type":"linux"},{"memory":0.4181111111111111,"swap":0.0,"ip":"10.1.6.244","cpu":0.003222222222222222,"type":"linux"},{"memory":0.442,"swap":0.0,"ip":"10.1.6.245","cpu":0.0045,"type":"linux"},{"memory":0.9610000000000001,"swap":0.0,"ip":"10.1.6.246","cpu":0.04820000000000001,"type":"linux"},{"memory":0.981,"swap":0.0,"ip":"10.1.6.248","cpu":0.0035454545454545456,"type":"linux"},{"memory":0.367,"swap":0.21099999999999997,"ip":"10.1.6.43","cpu":0.009000000000000001,"type":"windows"},{"memory":0.5750769230769232,"swap":0.24130769230769228,"ip":"10.1.6.6","cpu":0.03776923076923077,"type":"windows"},{"memory":0.3167333333333333,"swap":0.1836,"ip":"10.1.6.80","cpu":0.002866666666666667,"type":"windows"},{"memory":0.9565333333333335,"swap":0.6335999999999999,"ip":"10.1.6.81","cpu":0.11220000000000001,"type":"windows"},{"memory":0.394,"swap":0.2032,"ip":"10.1.6.83","cpu":0.6226,"type":"windows"},{"memory":0.4720000000000001,"swap":0.257,"ip":"10.1.6.84","cpu":0.4560666666666667,"type":"windows"},{"memory":0.48146666666666665,"swap":0.265,"ip":"10.1.6.97","cpu":0.08446666666666668,"type":"windows"},{"memory":0.768,"swap":0.40299999999999997,"ip":"10.1.77.11","cpu":0.11621428571428573,"type":"windows"},{"memory":0.5710000000000001,"swap":0.32,"ip":"10.1.77.12","cpu":0.036,"type":"windows"}]
+      let self = this
+      this.$http.post('performance/host/monitor', {
+        search:this.search
+        }).then(function(res){
+          self.Items = res.data
+          self.selectOrder
+        }).catch(function(err){
+          console.log('获取主机监控列表失败!')
+        })
     }
   },
   computed:{
-    ItemsByOrder () {
-      let self = this
-      return _.sortBy(this.Items,function(item){
-        if(self.orderBy.selected == 'desc'){
-          return -item[self.orderField.selected]
-        }else{
-          return item[self.orderField.selected]
-        }
+    ItemsByFilter () {
+      let ip = this.filterIp
+      return _.filter(this.Items, function(item){
+        return item.ip.indexOf(ip) >= 0;
       })
     }
   },
   watch:{
-    filterIp : function(val,oldVal){
-      let ip = this.filterIp
-      return _.filter(this.Items, function(item){
-        console.log(item)
-            return item.ip.indexOf('10.1.6.211') >= 0;
-      })
+    orderFieldSelected : function(val,oldVal){
+      this.selectOrder()
+    },
+    orderBySelected : function(val,oldVal){
+      this.selectOrder()
     }
   }
 }
