@@ -15,8 +15,8 @@
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <select v-model="orderField" class="form-control select2">
-                              <option v-for="item in orderFields" :value="item.key">{{item.value}}</option>
-                          </select>
+              <option v-for="item in orderFields" :value="item.key">{{item.value}}</option>
+          </select>
         </div>
         <div class="col-lg-3 col-xs-6">
           <select v-model="orderBy" class="form-control select2">

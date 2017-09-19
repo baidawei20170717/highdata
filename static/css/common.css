@@ -86,6 +86,7 @@ body{background:url(../img/s-bg.jpg) center 0 no-repeat;background-size:cover;}
 .sidebar-mini.sidebar-collapse .is-search .sidebar-form{display: block !important;}
 .is-search .input-group.date .input-group-addon{background: none;color: #fff;border: none;}
 .is-search .input-group.date input[type="text"]{background: none;color: #fff;border: none;}
+.is-search input[type="text"]{background: none;border: none;}
 
 
 
