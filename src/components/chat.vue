@@ -20,6 +20,11 @@ export default {
   },
   mounted() {
     HighCharts.chart(this.id,this.option)
+  },
+  methods:{
+    CreateNow(){
+      HighCharts.chart(this.id,this.option)
+    }
   }
 }
 </script>

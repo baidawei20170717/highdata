@@ -81,13 +81,12 @@
           remember: this.rememberme
         }
         let self = this
-        this.$http.post('login',params)
+        this.$service.login(params)
         .then(function (res) {
-          if (res.data.flag) {
-            this.$store.state.UserName = this.useraccount
-            this.$store.state.UserRole = this.useraccount
-            this.$store.state.UserName = this.useraccount
-            // self.$router.push({ path: '/' })
+          if (res.flag) {
+            self.$store.state.UserName = self.useraccount
+            self.$store.state.authorizd = true
+            self.$router.push({ path: '/' })
             self.disabledBtn = true
           } else {
             alert(res.data.msg);

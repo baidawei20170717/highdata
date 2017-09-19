@@ -6,10 +6,12 @@ import api from '@/common/api'
 import filter from '@/common/filter'
 import store from '@/common/store'
 import directive from '@/common/directive'
+import service from '@/common/service'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = api
 Vue.prototype.$moment = moment
+
 
 
 router.beforeEach((to,from,next) => {

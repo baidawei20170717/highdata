@@ -6,7 +6,7 @@ export default new Vuex.Store({
   state:{
     UserName: 'admin',
     UserRole: '管理员',
-    authorizd: false, //登录状态
+    authorizd: true, //登录状态
     isSearch: true
   },
   mutations:{

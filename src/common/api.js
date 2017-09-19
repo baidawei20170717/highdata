@@ -28,7 +28,7 @@ function checkCode (res) {
   if (res.status === -404) {
     console.log('Network anomaly')
   }
-  return res.data
+  return res
 }
 
 export default {
@@ -41,7 +41,8 @@ export default {
       data: data,
       timeout: 100000,
       headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/x-www-form-urlencoded' //
       }
     }).then(
       (response) => {
@@ -77,7 +78,7 @@ export default {
   get (url, params) {
     return axios({
       method: 'get',
-      baseURL: '/highdata/',
+      baseURL: '/api/',
       url,
       params,
       timeout: 100000,
