@@ -155,7 +155,6 @@
   export default {
     name: 'ex',
     created (){
-      commonCtrl.init();
       this.ddos_option ={
           chart: {
               backgroundColor: 'none',

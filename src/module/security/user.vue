@@ -492,7 +492,7 @@
             }
     return {
       windowsTopFail_chart: 'user_windowsTopFail',
-      windowsTopFail_option: null,
+      windowsTopFail_option: {},
       linuxTopFail_chart: 'user_linuxTopFail',
       linuxTopFail_option,
       windowsFail_chart: 'user_windowsFail',

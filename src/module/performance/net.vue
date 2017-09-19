@@ -26,7 +26,7 @@
             <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
           </div>
         </div>
-        <div class="col-lg-3 col-xs-12">
+        <div class="col-lg-3 col-xs-6">
             <div class="sidebar-form">
                 <div class="input-group">
                   <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
@@ -39,7 +39,7 @@
     <div class="xn-wlsb-list">
       <div class="row">
 
-        <router-link :to="{name: 'net_single', params: {id: item.ip}}" v-for="item in ItemsByFilter"  class="col-lg-3 col-xs-12">
+        <router-link :to="{name: 'net_single', params: {id: item.ip}}" v-for="item in ItemsByFilter" :key="item.ip" class="col-lg-3 col-xs-12">
           <div class="box box-solid">
             <div class="box-header text-center">
               <h3 class="box-title text-76d4f2">{{item.ip}}</h3>
