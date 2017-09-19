@@ -9,7 +9,7 @@
     </ol>
   </section>
   <section class="content">
-    <div class="is-search row-base-style">
+    <div class="is-search row-base-style" v-show="this.$store.state.isSearch" >
       <div class="left-icon"></div>
       <div class="right-icon"></div>
       <div class="row">
@@ -21,23 +21,30 @@
           <select v-model="orderBySelected" v-select2='orderBySptions' class="form-control select2">
           </select>
         </div>
-        <div class="col-lg-6 col-xs-12">
+        <div class="col-lg-3 col-xs-6">
           <div class="sidebar-form">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="请输入筛选IP" v-model="filterIp" >
-              <span class="input-group-btn"> <button type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
+              <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
             </div>
           </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
+                    <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
+                </div>
+            </div>
         </div>
       </div>
     </div>
     <div class="xn-zj-list">
       <div class="row">
-        <router-link to="/performance/db/1" v-for="item in ItemsByFilter" class="col-lg-3 col-xs-12">
+        <router-link :to="{name: 'db_single', params: {id: item.ip}}" v-for="item in ItemsByFilter" class="col-lg-3 col-xs-12">
           <div class="box box-solid">
             <div class="box-header text-center">
               <h3 class="box-title text-ffffff">{{item.ip}}</h3>
-              <div class="text-ffffff text-size12">主机：{{item.type}} / 数据库：{{item.dbType}} <br>占用内存：{{item.memory/1024/1024 | number}}MB</div>
+              <div class="text-ffffff text-size12">主机：{{item.type}} / 数据库：{{item.dbType}} <br>占用内存：{{item.memory/1024/1024 | number(2)}}MB</div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -45,7 +52,7 @@
                 <span class="label">CPU</span>
                 <div class="progress ">
                   <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                    <span class="sr-only">{{item.cpu * 100 | number}}% </span>
+                    <span class="sr-only">{{item.cpu * 100 | number }}% </span>
                   </div>
                 </div>
               </div>
@@ -53,7 +60,7 @@
                 <span class="label">MEM</span>
                 <div class="progress">
                   <div class="progress-bar progress-bar-green " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                    <span class="sr-only">{{item.pct * 100 | number}}% </span>
+                    <span class="sr-only">{{item.pct * 100 | number }}% </span>
                   </div>
                 </div>
               </div>
@@ -69,7 +76,7 @@
 <script type="es6">
 import _ from 'lodash'
 export default {
-  name: 'host',
+  name: 'db',
   created (){
     this.search()
   },

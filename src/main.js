@@ -10,9 +10,14 @@ Vue.config.productionTip = false
 Vue.prototype.$http = api;
 /* eslint-disable no-new */
 
-Vue.filter('number',function(key,val) {
-  return key.toFixed(1);
+Vue.filter('number',function(value,num) {
+  if(num != undefined){
+    return value.toFixed(num)
+  }else{
+    return value.toFixed(1)
+  }
 });
+
 Vue.use(Vuex)
 
 const store =  new Vuex.Store({

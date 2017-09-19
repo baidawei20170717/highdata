@@ -52,6 +52,7 @@ export default new Router({
       }
     },
     {
+      name: 'db_single',
       path: '/Performance/db/:id',
       components: {
         header: AppHeader,
@@ -102,6 +103,7 @@ export default new Router({
       }
     },
     {
+      name: 'ws_single',
       path: '/Performance/ws/:id',
       components: {
         header: AppHeader,
@@ -189,5 +191,9 @@ export default new Router({
         default: security_single
       }
     },
+    {
+      path:'*',
+      component: {template:'<div style="font-size:48px;color:#fff">404</div>'}
+    }
   ]
 })

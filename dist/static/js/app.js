@@ -157,19 +157,18 @@ $(function () {
 
   //Set up the object
   _init();
-
-  //Activate the layout maker
   $.AdminLTE.layout.activate();
-
-  //Enable sidebar tree view controls
   if (o.enableControlTreeView) {
     $.AdminLTE.tree('.sidebar');
   }
-
-  //Enable control sidebar
   if (o.enableControlSidebar) {
     $.AdminLTE.controlSidebar.activate();
   }
+  //Activate the layout maker
+
+  //Enable sidebar tree view controls
+
+  //Enable control sidebar
 
   //Add slimscroll to navbar dropdown
   if (o.navbarMenuSlimscroll && typeof $.fn.slimscroll != 'undefined') {
@@ -224,6 +223,7 @@ $(function () {
     });
 
   });
+
 });
 
 /* ----------------------------------
@@ -231,6 +231,7 @@ $(function () {
  * ----------------------------------
  * All AdminLTE functions are implemented below.
  */
+
 function _init() {
   'use strict';
   /* Layout
@@ -247,7 +248,6 @@ function _init() {
       var _this = this;
       _this.fix();
       _this.fixSidebar();
-      $('body, html, .wrapper').css('height', 'auto');
       $(window, ".wrapper").resize(function () {
         _this.fix();
         _this.fixSidebar();
@@ -285,6 +285,7 @@ function _init() {
       }
     },
     fixSidebar: function () {
+
       //Make sure the body tag has the .fixed class
       if (!$("body").hasClass("fixed")) {
         if (typeof $.fn.slimScroll != 'undefined') {
