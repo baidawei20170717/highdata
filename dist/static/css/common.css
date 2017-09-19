@@ -83,6 +83,7 @@ body{background:url(../img/s-bg.jpg) center 0 no-repeat;background-size:cover;}
 .is-search .select2-selection .select2-selection--single{background: none;border: none;color: #fff;}
 .is-search .select2-container--default .select2-selection--single .select2-selection__rendered{color: #fff;}
 .is-search .row .col-lg-3{border-right: 1px solid #ccc;}
+.is-search input[type="text"]{background: none;border: none;}
 .sidebar-mini.sidebar-collapse .is-search .sidebar-form{display: block !important;}
 .is-search .input-group.date .input-group-addon{background: none;color: #fff;border: none;}
 .is-search .input-group.date input[type="text"]{background: none;color: #fff;border: none;}

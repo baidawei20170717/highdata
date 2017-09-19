@@ -14,7 +14,12 @@
       <div class="right-icon"></div>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
+<<<<<<< HEAD
           <select v-model="orderFieldSelected" v-select2='orderFieldOptions' class="form-control select2">
+=======
+          <select v-model="orderField" class="form-control select2">
+              <option v-for="item in orderFields" :value="item.key">{{item.value}}</option>
+>>>>>>> a720f7a737d2b1503565fe5f0a752e044d0e537a
           </select>
         </div>
         <div class="col-lg-3 col-xs-6">
