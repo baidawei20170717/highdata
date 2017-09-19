@@ -41,6 +41,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: home
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -49,6 +52,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: db
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -58,6 +64,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: db_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -66,6 +75,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: host
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -75,6 +87,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: host_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -83,6 +98,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: net
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -92,6 +110,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: net_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -100,6 +121,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: ws
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -109,6 +133,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: ws_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -117,6 +144,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: def
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -125,6 +155,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: ex
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -133,6 +166,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: int
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -141,6 +177,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: sys
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -149,6 +188,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: tw
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -157,6 +199,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: user
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -165,6 +210,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: monitor
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -173,6 +221,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: monitor_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -181,6 +232,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: security
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {
@@ -189,6 +243,9 @@ export default new Router({
         header: AppHeader,
         aside: AppAside,
         default: security_single
+      },
+      meta:{
+        auth: true //需要校验
       }
     },
     {

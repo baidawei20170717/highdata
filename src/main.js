@@ -1,50 +1,30 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import moment from 'moment'
 import router from '@/common/router'
 import api from '@/common/api'
-import Vuex from 'vuex'
+import filter from '@/common/filter'
+import store from '@/common/store'
+import directive from '@/common/directive'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = api;
-/* eslint-disable no-new */
+Vue.prototype.$http = api
+Vue.prototype.$moment = moment
 
-Vue.filter('number',function(value,num) {
-  if(num != undefined){
-    return value.toFixed(num)
-  }else{
-    return value.toFixed(1)
-  }
-});
 
-Vue.use(Vuex)
-
-const store =  new Vuex.Store({
-  state:{
-    UserName: 'admin',
-    UserRole: '管理员',
-    isSearch: true
-  },
-  mutations:{
-    ChangeSearch(){
-      this.state.isSearch = !this.state.isSearch
+router.beforeEach((to,from,next) => {
+    if(to.matched.some( m => m.meta.auth)){
+        if(store.state.authorizd) {
+            next()
+        }else{
+            // 未登录,跳转到登陆页面，并且带上 将要去的地址，方便登陆后跳转。
+            next({path:'/login',query:{ referrer: to.fullPath} })
+        }
+    }else{
+        next()
     }
-  }
 })
 
-Vue.directive('select2', {
-  inserted: function (el, binding, vnode) {
-   let options = binding.value || {};
-
-  $(el).select2(options).on("select2:select", (e) => {
-    el.dispatchEvent(new Event('change', { target: e.target }));
-  });
-  },
-  update: function(el, binding, vnode) {
-    $(el).trigger("change");
-  }
-});
 
 new Vue({
   el: '#app',

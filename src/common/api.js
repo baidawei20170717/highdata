@@ -28,22 +28,17 @@ function checkCode (res) {
   if (res.status === -404) {
     console.log('Network anomaly')
   }
-  if(res.code === 1){
-    //跳转
-  }
-  if(res.code === 0)
-  {
-    return res.data
-  }
+  return res.data
 }
 
 export default {
   post (url, data) {
     return axios({
       method: 'post',
-      baseURL: '/highdata/',
+      baseURL: '/api/', //test
+      // baseURL: '/highdata/',
       url,
-      data: JSON.stringify(data),
+      data: data,
       timeout: 100000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest'

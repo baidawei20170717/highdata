@@ -14,33 +14,33 @@
     </ol>
   </section>
   <section class="content">
-<div class="is-search row-base-style" v-show="this.$store.state.isSearch">
-  <div class="left-icon"></div>
-  <div class="right-icon"></div>
-  <div class="row">
-    <div class="col-lg-3 col-xs-6">
-      <div class="input-group date">
-        <div class="input-group-addon">
-          <i class="fa fa-calendar"></i>
+    <div class="is-search row-base-style" v-show="this.$store.state.isSearch">
+      <div class="left-icon"></div>
+      <div class="right-icon"></div>
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <date-picker :date="startTime" :limit="limit"></date-picker>
+          </div>
         </div>
-        <date-picker :date="params.startTime" :option="option" :limit="limit"></date-picker>
-      </div>
-    </div>
-    <div class="col-lg-3 col-xs-6">
-      <div class="form-group" style="margin-bottom: 0;">
-        <input v-model="ip" type="text" class="form-control" placeholder="请输入筛选IP">
-      </div>
-    </div>
-    <div class="col-lg-6 col-xs-12">
-        <div class="sidebar-form">
+        <div class="col-lg-3 col-xs-6">
+          <div class="form-group" style="margin-bottom: 0;">
+            <input v-model="ip" type="text" class="form-control" placeholder="请输入筛选IP">
+          </div>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+          <div class="sidebar-form">
             <div class="input-group">
               <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
               <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
-</div>
     <div class="row row-base-style text-center is-info-row">
       <div class="left-icon"></div>
       <div class="right-icon"></div>
@@ -62,7 +62,7 @@
         <div class="row-base-style">
           <div class="left-icon"></div>
           <div class="right-icon"></div>
-          <div class="item" >
+          <div class="item">
             <x-chart :id="cpu_chart" :option="cpu_option"></x-chart>
           </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="row-base-style">
           <div class="left-icon"></div>
           <div class="right-icon"></div>
-          <div class="item" >
+          <div class="item">
             <x-chart :id="memory_chart" :option="memory_option"></x-chart>
           </div>
         </div>
@@ -119,20 +119,20 @@
             <div class="box-body no-padding layer-mb20">
               <table class="table table-condensed">
                 <tr>
-                                    <th>分区</th>
-                                    <th>磁盘空间</th>
-                                    <th>可用空间</th>
-                                    <th>已使用空间</th>
-                                    <th>磁盘使用率</th>
-                                    <th>文件数</th>
+                  <th>分区</th>
+                  <th>磁盘空间</th>
+                  <th>可用空间</th>
+                  <th>已使用空间</th>
+                  <th>磁盘使用率</th>
+                  <th>文件数</th>
                 </tr>
                 <tr v-for="item in DiskByFilter">
-                                    <td>{{item.name}}</td>
-                                    <td>{{item.total/1024/1024/1024 | number(2) }}GB</td>
-                                    <td>{{item.available/1024/1024/1024 | number(2) }}GB</td>
-                                    <td>{{item.usedbytes/1024/1024/1024 | number(2) }}GB</td>
-                                    <td>{{item.usedpct * 100 | number(2) }}%</td>
-                                    <td>{{item.files}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.total/1024/1024/1024 | number(2) }}GB</td>
+                  <td>{{item.available/1024/1024/1024 | number(2) }}GB</td>
+                  <td>{{item.usedbytes/1024/1024/1024 | number(2) }}GB</td>
+                  <td>{{item.usedpct * 100 | number(2) }}%</td>
+                  <td>{{item.files}}</td>
                 </tr>
               </table>
             </div>
@@ -146,7 +146,7 @@
 </template>
 
 <script type="es6">
-  import myDatepicker from 'vue-datepicker'
+  import myDatepicker from '@/components/datepicker.vue'
   import XChart from '@/components/chat'
   export default {
     name: 'host_single',
@@ -156,7 +156,14 @@
     data() {
     return {
       ip : this.$route.params.id,
-      date : moment().format('YYYY-MM-DD'),
+      startTime: {
+        time: this.$moment().format('YYYY-MM-DD')
+      },
+      limit: [
+      {
+        type: 'fromto',
+        from: this.$moment().format('YYYY-MM-DD')
+      }],
       params : {
         startTime: '',
         endTime: '',
@@ -186,7 +193,7 @@
     getBasic(){
       let self = this
       self.basic = {"disk":5.317466074112E12,"memory":3.366273024E10,"cpu":64.0}
-      self.$http.post('performance/host/' + this.ip + '/basic',this.params)
+      self.$http.post('performance/host/' + self.ip + '/basic',this.params)
       .then(function(res){
         self.Items = res.data
       }).catch(function(err){
@@ -375,15 +382,15 @@
       })
     },
     getDisk(){
+      console.log("ip:"+this.ip)
       let self = this
       self.disk=[{"usedpct":0.049,"total":4.328876056576E12,"name":"/data/sdb1","available":3.898195546112E12,"files":2.68435456E8,"usedbytes":2.10920853504E11},{"usedpct":0.14300000000000002,"total":9.14139922432E11,"name":"/","available":7.36752590848E11,"files":5.6696832E7,"usedbytes":1.30940923904E11},{"usedpct":0.0,"total":1.683136512E10,"name":"/sys/fs/cgroup","available":1.683136512E10,"files":4109220.0,"usedbytes":0.0},{"usedpct":0.0,"total":1.683136512E10,"name":"/dev/shm","available":1.6831279104E10,"files":4109220.0,"usedbytes":86016.0},{"usedpct":0.0,"total":1.6815067136E10,"name":"/dev","available":1.6815067136E10,"files":4105241.0,"usedbytes":0.0},{"usedpct":0.014,"total":1.683136512E10,"name":"/run","available":1.659451392E10,"files":4109220.0,"usedbytes":2.368512E8},{"usedpct":0.0,"total":3.366273024E9,"name":"/run/user/0","available":3.366273024E9,"files":4109220.0,"usedbytes":0.0},{"usedpct":0.0,"total":3.366273024E9,"name":"/run/user/42","available":3.36625664E9,"files":4109220.0,"usedbytes":16384.0},{"usedpct":0.047,"total":2.0948992E8,"name":"/boot/efi","available":1.99585792E8,"files":0.0,"usedbytes":9904128.0},{"usedpct":0.619,"total":1.9889664E8,"name":"/boot","available":6.1201408E7,"files":51200.0,"usedbytes":1.23015168E8},{"usedpct":0.0,"total":0.0,"name":"/dev/hugepages","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/dev/mqueue","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/dev/pts","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/proc","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/proc/fs/nfsd","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/proc/sys/fs/binfmt_misc","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/firmware/efi/efivars","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/blkio","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/cpu,cpuacct","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/cpuset","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/devices","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/freezer","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/hugetlb","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/memory","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/net_cls,net_prio","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/perf_event","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/pids","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/cgroup/systemd","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/pstore","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/fs/selinux","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/kernel/config","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/kernel/debug","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/sys/kernel/security","available":0.0,"files":0.0,"usedbytes":0.0},{"usedpct":0.0,"total":0.0,"name":"/var/lib/nfs/rpc_pipefs","available":0.0,"files":0.0,"usedbytes":0.0}]
-      this.$http.post('performance/host/' + this.ip + '/disk', this.params).then(function(res){
+      self.$http.post('performance/host/' + self.ip + '/disk', self.params).then(function(res){
         self.disk = res.data
       }).catch(function(err){
         console.log('获取当前磁盘列表失败!')
       })
     }
-
   },
   computed:{
     ProcessByFilter () {
@@ -393,8 +400,15 @@
       return this.disk.slice(0,this.disNowDiskCount)
     }
   },
+  watch:{
+    startTime:function(val,oldVal){
+      this.date = this.$moment(val).format('YYYY-MM-DD')
+      this.search()
+    }
+  },
   components: {
-    XChart
+    XChart,
+    'date-picker': myDatepicker
   }
 }
 </script>

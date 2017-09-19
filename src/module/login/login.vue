@@ -74,12 +74,6 @@
           return;
         }
 
-        //
-        this.$store.state.UserName = this.useraccount
-        this.$router.push({ path: '/' })
-        return
-        //
-
         this.disabledBtn = true
         var params = {
           username: this.useraccount,
@@ -88,11 +82,15 @@
         }
         let self = this
         this.$http.post('login',params)
-        .then(function (data) {
-          if (data.flag) {
-            self.$router.push({ path: '/' })
+        .then(function (res) {
+          if (res.data.flag) {
+            this.$store.state.UserName = this.useraccount
+            this.$store.state.UserRole = this.useraccount
+            this.$store.state.UserName = this.useraccount
+            // self.$router.push({ path: '/' })
+            self.disabledBtn = true
           } else {
-            alert(data.msg);
+            alert(res.data.msg);
             self.disabledBtn = false
           }
         })
