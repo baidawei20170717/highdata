@@ -14,12 +14,7 @@
       <div class="right-icon"></div>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-<<<<<<< HEAD
           <select v-model="orderFieldSelected" v-select2='orderFieldOptions' class="form-control select2">
-=======
-          <select v-model="orderField" class="form-control select2">
-              <option v-for="item in orderFields" :value="item.key">{{item.value}}</option>
->>>>>>> a720f7a737d2b1503565fe5f0a752e044d0e537a
           </select>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -27,17 +22,15 @@
           </select>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="sidebar-form">
-            <div class="input-group">
-              <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
-            </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <input v-model="filterIp" type="text" class="form-control" placeholder="请输入筛选IP">
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-12">
             <div class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
-                    <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
+                  <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
+                  <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
                 </div>
             </div>
         </div>
