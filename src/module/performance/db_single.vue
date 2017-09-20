@@ -51,7 +51,7 @@
         <div class="item"><i class="fa fa-server text-52dabd" aria-hidden="true"></i>数据库：{{basic.dbType}}</div>
       </div>
       <div class="col-lg-3 col-xs-6">
-        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>内存：{{ basic.memory/1024/1024/1024 | number(2) }}gb</div>
+        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>内存：{{ basic.memory/1024/1024/1024 | number(2) }}GB</div>
       </div>
       <div class="col-lg-2 col-xs-6">
         <div class="item"><i class="fa fa-dashboard text-e95658" aria-hidden="true"></i>cpu：{{basic.cpu/2}}核</div>
@@ -215,31 +215,51 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
-                        }
+                        // categories: ['0', '4', '8', '12', '16', '20', '24'],
+                        // tickmarkPlacement: 'on',
+                        // title: {
+                        //     enabled: false
+                        // },
+                        // labels: {
+                        //     enabled: false //不显示横坐标
+                        // }
+
+                      type: 'datetime',
+                      dateTimeLabelFormats: {
+                          millisecond: '%H:%M:%S.%L',
+                          second: '%H:%M:%S',
+                          minute: '%H:%M',
+                          hour: '%H:%M',
+                          day: '%m-%d',
+                          week: '%m-%d',
+                          month: '%Y-%m',
+                          year: '%Y'
+                      }
                     },
                     yAxis: {
                         title: {
                             text: ''
                         },
                         labels: {
-                            formatter: function() {
-                                // return this.value;
-                                return '<div style="color:#fff">' + this.value + '</div>'
-                            }
+                            // formatter: function() {
+                            //     // return this.value;
+                            //     return '<div style="color:#fff">' + this.value + '</div>'
+                            // }
                         },
                         gridLineColor: '#333', //网格线样式
                         tickAmount: 7 //显示刻度数
                     },
                     tooltip: {
-                        split: true,
-                        valueSuffix: ''
+                      dateTimeLabelFormats: {
+                      millisecond: '%H:%M:%S.%L',
+                      second: '%H:%M:%S',
+                      minute: '%H:%M',
+                      hour: '%H:%M',
+                      day: '%Y-%m-%d',
+                      week: '%m-%d',
+                      month: '%Y-%m',
+                      year: '%Y'
+                      }
                     },
                     plotOptions: {
                         area: {

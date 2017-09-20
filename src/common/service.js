@@ -107,17 +107,80 @@ Vue.prototype.$service = {
     return api.post('performance/ws/monitor.json',params)
   },
 
-  //性能监控-中间件监控-
+  //性能监控-中间件监控-基本信息
+  wsBasic(ip,params){
+    //return api.post('performance/ws/'+ ip +'/basic',params)
+    return api.post('performance/ws/basic.json',params)
+  },
+
+  //性能监控-中间件监控-当天请求总数
+  wsCount(ip,params){
+    //return api.post('performance/ws/'+ ip +'/count',params)
+    return api.post('performance/ws/count.json',params)
+  },
+
+  //性能监控-中间件监控-当日连接数趋势
+  wsCountDay(ip,params){
+    //return api.post('performance/ws/'+ ip +'/count/day',params)
+    return api.post('performance/ws/day.json',params)
+  },
+
+  //性能监控-中间件监控-当日HTTP请求类型统计
+  wsMethod(ip,params){
+    //return api.post('performance/ws/'+ ip +'/method',params)
+    return api.post('performance/ws/method.json',params)
+  },
+
+  //性能监控-中间件监控-当日HTTP请求状态统计
+  wsStatus(ip,params){
+    //return api.post('performance/ws/'+ ip +'/status',params)
+    return api.post('performance/ws/status.json',params)
+  },
+
+  //性能监控-中间件监控-当日客户端IP TOP统计
+  wsClientipTop(ip,params){
+    //return api.post('performance/ws/'+ ip +'/clientip/top',params)
+    return api.post('performance/ws/clientip.json',params)
+  },
+
+  //性能监控-中间件监控-当日流量趋势
+  wsFlowDay(ip,params){
+    //return api.post('performance/ws/'+ ip +'/flow/day',params)
+    return api.post('performance/ws/flowday.json',params)
+  },
+
+  //性能监控-中间件监控-当日URL访问量 TOP统计
+  wsRequestTop(ip,params){
+    //return api.post('performance/ws/'+ ip +'/request/top',params)
+    return api.post('performance/ws/requesttop.json',params)
+  },
+
+  //性能监控-中间件监控-当日最耗流量URL TOP统计
+  wsByteTop(ip,params){
+    //return api.post('performance/ws/'+ ip +'/byte/top',params)
+    return api.post('performance/ws/bytetop.json',params)
+  },
+
 
   /*--------------------------------------------------网络设备监控---------------------------------------------------*/
 
 
   //性能监控-网络设备监控
-  wsmonitor(params){
+  netmonitor(params){
     // return api.post('performance/net/monitor',params)
     return api.post('performance/net/monitor.json',params)
-  }
+  },
 
-  //
+  //性能监控-网络设备监控-基本信息
+  netBasic(ip,params){
+    // return api.post('/highdata/performance/net/'+ip+'/basic',params)
+    return api.post('/highdata/performance/net/basic.json',params)
+  }
+  //性能监控-网络设备监控-当日事件数
+
+  //性能监控-网络设备监控-当日事件趋势
+
+  //性能监控-网络设备监控-当天最后事件
+
 
 }
