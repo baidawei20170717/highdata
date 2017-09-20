@@ -48,13 +48,13 @@
         <div class="item"><i class="fa fa-desktop text-fa9a2a" aria-hidden="true"></i>设备ip：{{ ip }}</div>
       </div>
       <div class="col-lg-3 col-xs-6">
-        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>内存：{{ basic.memory/1024/1024/1024 | number(2) }}gb</div>
+        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>内存：{{ basic.memory/1024/1024/1024 | number(2) }}GB</div>
       </div>
       <div class="col-lg-3 col-xs-6">
         <div class="item"><i class="fa fa-dashboard text-e95658" aria-hidden="true"></i>cpu：{{ basic.cpu/2 }}核</div>
       </div>
       <div class="col-lg-3 col-xs-6">
-        <div class="item"><i class="fa fa-tasks text-81bd51" aria-hidden="true"></i>磁盘：{{ basic.disk/1024/1024/1024 | number(2) }}gb</div>
+        <div class="item"><i class="fa fa-tasks text-81bd51" aria-hidden="true"></i>磁盘：{{ basic.disk/1024/1024/1024 | number(2) }}GB</div>
       </div>
     </div>
     <div class="row">
@@ -160,10 +160,11 @@
         time: this.$moment().format('YYYY-MM-DD')
       },
       limit: [
-      {
-        type: 'fromto',
-        from: this.$moment().format('YYYY-MM-DD')
-      }],
+      // {
+      //   type: 'fromto',
+      //   from: this.$moment().format('YYYY-MM-DD')
+      // }
+      ],
       params : {
         startTime: '',
         endTime: '',
@@ -172,9 +173,9 @@
       basic:{
         memory: 0, cpu: 0, disk: 0
       },
-      cpu_chart: 'cpu',
+      cpu_chart: 'host_cpu',
       cpu_option: {},
-      memory_chart: 'memory',
+      memory_chart: 'host_memory',
       memory_option: {},
       process:[],
       disk:[],
@@ -184,6 +185,10 @@
   },
   methods:{
     search(){
+      let date = this.startTime.time
+      this.params.startTime = this.$moment(date).format('x')
+      this.params.endTime =this.$moment(date).add(1, 'd').format('x')
+
       this.disNowDiskCount = 10
       this.disNowProcessCount = 10
       this.getBasic()
@@ -409,8 +414,7 @@
     }
   },
   watch:{
-    startTime:function(val,oldVal){
-      this.date = this.$moment(val).format('YYYY-MM-DD')
+    'startTime.time':function(val,oldVal){
       this.search()
     }
   },

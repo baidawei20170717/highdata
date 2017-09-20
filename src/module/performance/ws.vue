@@ -3,13 +3,15 @@
   <section class="content-header">
     <h1> 中间件监控  </h1>
     <ol class="breadcrumb">
-          <li><router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link></li>
-          <li><a href="javascript:;">性能监控</a></li>
-          <li class="active">中间件监控</li>
+      <li>
+        <router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link>
+      </li>
+      <li><a href="javascript:;">性能监控</a></li>
+      <li class="active">中间件监控</li>
     </ol>
   </section>
   <section class="content">
-    <div class="is-search row-base-style" v-show="this.$store.state.isSearch" >
+    <div class="is-search row-base-style" v-show="this.$store.state.isSearch">
       <div class="left-icon"></div>
       <div class="right-icon"></div>
       <div class="row">
@@ -27,12 +29,12 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="sidebar-form">
-                <div class="input-group">
-                  <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
-                  <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
-                </div>
+          <div class="sidebar-form">
+            <div class="input-group">
+              <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
+              <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,13 +114,11 @@ export default {
       })
     },
     search (){
-      this.Items =[{"pct":0.009000000000000001,"memory":1.53337856E8,"ip":"10.1.33.1","cpu":0.0,"wsType":"tomcat","type":"linux"},{"pct":0.0345,"memory":5.722477714285715E8,"ip":"10.1.5.3","cpu":7.142857142857143E-4,"wsType":"tomcat","type":"linux"},{"pct":0.136,"memory":4.560778386285714E9,"ip":"10.1.5.6","cpu":0.009428571428571429,"wsType":"tomcat","type":"linux"},{"pct":0.006,"memory":4.30395392E8,"ip":"10.1.6.164","cpu":6.666666666666666E-4,"wsType":"tomcat","type":"linux"},{"pct":0.11024444444444445,"memory":3.0071490332444444E9,"ip":"10.1.6.203","cpu":0.006577777777777779,"wsType":"tomcat","type":"linux"},{"pct":0.005000000000000001,"memory":3.63360256E8,"ip":"10.1.6.222","cpu":2.666666666666667E-4,"wsType":"tomcat","type":"linux"},{"pct":0.30100000000000005,"memory":5.020777403733334E9,"ip":"10.1.6.230","cpu":0.023600000000000006,"wsType":"tomcat","type":"linux"},{"pct":0.042,"memory":7.010436827428571E8,"ip":"10.1.6.232","cpu":0.001342857142857143,"wsType":"tomcat","type":"linux"},{"pct":0.08600000000000001,"memory":2.902616064E9,"ip":"10.1.6.235","cpu":0.001,"wsType":"tomcat","type":"linux"},{"pct":0.02,"memory":6.75180544E8,"ip":"10.1.6.238","cpu":0.0019333333333333333,"wsType":"tomcat","type":"linux"},{"pct":0.021,"memory":1.03755776E9,"ip":"10.1.6.241","cpu":9.333333333333334E-4,"wsType":"tomcat","type":"linux"},{"pct":0.057,"memory":1.910714368E9,"ip":"10.1.6.243","cpu":0.002,"wsType":"tomcat","type":"linux"},{"pct":0.036000000000000004,"memory":5.95996672E8,"ip":"10.1.6.244","cpu":0.001,"wsType":"tomcat","type":"linux"},{"pct":0.036000000000000004,"memory":6.049661672727273E8,"ip":"10.1.6.245","cpu":0.0011818181818181819,"wsType":"tomcat","type":"linux"},{"pct":0.027000000000000003,"memory":4.4189696E8,"ip":"10.1.6.248","cpu":0.0010000000000000002,"wsType":"tomcat","type":"linux"}]
       let self = this
-      this.$http.post('performance/ws/monitor', {
-        search:this.search
-        }).then(function(res){
-          self.Items = res.data
-          self.selectOrder
+      this.$service.wsmonitor(this.params)
+      .then(function(res){
+          self.Items = res
+          self.selectOrder()
         }).catch(function(err){
           console.log('获取中间件监控列表失败!')
         })

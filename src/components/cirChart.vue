@@ -25,6 +25,19 @@ export default {
         });
         //chart = c;
     })
+  },
+  methods:{
+    CreateNow(){
+      HighCharts.chart(this.id,this.option, function(c) {
+          // 环形图圆心
+          var centerY = c.series[0].center[1],
+              titleHeight = parseInt(c.title.styles.fontSize);
+          c.setTitle({
+              y: centerY + titleHeight / 2
+          });
+          //chart = c;
+      })
+    }
   }
 }
 </script>

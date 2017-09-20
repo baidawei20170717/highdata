@@ -44,7 +44,6 @@
               <h3 class="box-title text-ffffff">{{item.ip}}</h3>
               <div class="text-ffffff text-size12">主机：{{item.type}} / 数据库：{{item.dbType}} <br>占用内存：{{item.memory/1024/1024 | number(2)}}MB</div>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
               <div class="is-progress">
                 <span class="label">CPU</span>
@@ -112,13 +111,11 @@ export default {
       })
     },
     search (){
-      this.Items = [{"pct":0.014,"memory":2.38768128E8,"ip":"10.1.33.1","cpu":0.023333333333333334,"dbType":"mysql","type":"linux"},{"pct":0.003,"memory":4.5143906461538464E7,"ip":"10.1.5.3","cpu":2.3076923076923076E-4,"dbType":"mysql","type":"linux"},{"pct":0.0,"memory":1.081344E7,"ip":"10.1.5.4","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.002,"memory":8.1510912E7,"ip":"10.1.5.6","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.59,"memory":9.829407675733334E9,"ip":"10.1.6.176","cpu":0.0016,"dbType":"mysql","type":"linux"},{"pct":0.5340000000000001,"memory":8.896724718933332E9,"ip":"10.1.6.177","cpu":0.9834,"dbType":"mysql","type":"linux"},{"pct":0.017,"memory":5.68471552E8,"ip":"10.1.6.204","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.004,"memory":2.748416E8,"ip":"10.1.6.222","cpu":5.333333333333334E-4,"dbType":"mysql","type":"linux"},{"pct":0.308,"memory":1.0374518920533333E10,"ip":"10.1.6.231","cpu":0.9453333333333335,"dbType":"mysql","type":"linux"},{"pct":0.01,"memory":3.4899968E8,"ip":"10.1.6.234","cpu":0.0026,"dbType":"mysql","type":"linux"},{"pct":0.021,"memory":1.049194496E9,"ip":"10.1.6.241","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.09899999999999999,"memory":3.31634688E9,"ip":"10.1.6.243","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.015000000000000001,"memory":2.45649408E8,"ip":"10.1.6.244","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.014,"memory":2.379776E8,"ip":"10.1.6.245","cpu":0.001,"dbType":"mysql","type":"linux"},{"pct":0.014999999999999998,"memory":2.41680384E8,"ip":"10.1.6.248","cpu":0.001,"dbType":"mysql","type":"linux"}]
       let self = this
-      this.$http.post('performance/db/monitor', {
-        search:this.search
-        }).then(function(res){
-          self.Items = res.data
-          self.selectOrder
+      this.$service.dbMonittor(this.params)
+      .then(function(res){
+          self.Items = res
+          self.selectOrder()
         }).catch(function(err){
           console.log('获取数据库监控列表失败!')
         })
