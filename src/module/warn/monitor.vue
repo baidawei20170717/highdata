@@ -45,7 +45,7 @@
             <br>
             <br>
             <p>当天性能告警总数</p>
-            <p class="text-size60 text-76d4f2">45678</p>
+            <p class="text-size60 text-76d4f2">{{count}}</p>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-              <x-chart :id="performance_chart" :option="performance_option" :css="300"></x-chart>
+              <x-chart :id="day_chart" :option="day_option" ref="day" :css="300"></x-chart>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-            <x-chart :id="performanceType_chart" :option="performanceType_option"></x-chart>
+            <x-chart :id="type_chart" :option="type_option" ref="type"></x-chart>
           </div>
         </div>
       </div>
@@ -77,7 +77,6 @@
             <div class="box-header">
               <h3 class="box-title">当天性能告警列表</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body no-padding layer-mb20">
               <table class="table table-condensed">
                 <tr>
@@ -86,10 +85,10 @@
                   <th style="width: 100px">告警数量</th>
                 </tr>
 
-                <tr>
-                  <td><router-link style="color:#fff" to="/warn/monitor/1">同一服务器3分钟内平均cpu超过80％</router-link></td>
-                  <td>性能告警</td>
-                  <td>100</td>
+                <tr v-for="item in events">
+                  <td><router-link style="color:#fff" :to="{name: 'warn_monitor_single', params: {id: item.ruleId}}">{{item.name}}</router-link></td>
+                  <td>{{item.type == 'performance' ? '性能告警': '非性能告警'}}</td>
+                  <td>{{item.count}}</td>
                 </tr>
 
               </table>
@@ -103,93 +102,143 @@
 </template>
 
 <script type="es6">
+  import myDatepicker from '@/components/datepicker.vue'
   import XChart from '@/components/chat'
   import CChart from '@/components/cirChart'
   export default {
     name: 'monitor',
-    mounted (){
-      commonCtrl.init();
+    created (){
+      this.search()
     },
     data() {
-    let performance_option ={
-                chart: {
-                    backgroundColor: 'none',
-                    type: 'line',
-                    marginLeft: 60,
-                    marginRight: 20
-                },
-                title: {
-                    text: '当天性能告警趋势',
-                    align: 'left',
-                    style: {
-                        color: '#fff'
+      return {
+        startTime: {
+          time: this.$moment().format('YYYY-MM-DD')
+        },
+        limit:[],
+        params : {
+          startTime: '',
+          endTime: '',
+          search: '*'
+        },
+        count:0,
+        type: 'performance',
+        events:[],
+        day_chart: 'monitor_day',
+        day_option:{},
+        type_chart: 'monitor_type',
+        type_option:{}
+      }
+    },
+    methods:{
+      search(){
+        let date = this.startTime.time
+        this.params.startTime = this.$moment(date).format('x')
+        this.params.endTime =this.$moment(date).add(1, 'd').format('x')
+
+        this.getCount()
+        this.getDay()
+        this.getType()
+        this.getEvent()
+      },
+      getCount(){
+        let self = this
+        this.$service.warncount(this.type,this.params)
+        .then(function(res){
+          self.count = res
+        }).catch(function(err){
+          console.log('获取数量统计数据失败!')
+        })
+      },
+      getDay(){
+        let self = this
+        this.day_option = {
+                    chart: {
+                        backgroundColor: 'none',
+                        type: 'line',
+                        marginLeft: 60,
+                        marginRight: 20
                     },
-                    x: 20,
-                    y: 30,
-                    margin: 40
-                },
-                legend: {
-                    enabled: false,
-                    itemStyle: {
-                        color: '#fff'
-                    }
-                },
-                xAxis: {
-                    categories: ['0', '4', '8', '12', '16', '20', '24'],
-                    tickmarkPlacement: 'on',
                     title: {
-                        enabled: false
+                        text: '当天性能告警趋势',
+                        align: 'left',
+                        style: {
+                            color: '#fff'
+                        },
+                        x: 20,
+                        y: 30,
+                        margin: 40
                     },
-                    labels: {
-                        enabled: false //不显示横坐标
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: ''
-                    },
-                    labels: {
-                        formatter: function() {
-                            // return this.value;
-                            return '<div style="color:#fff">' + this.value + '</div>'
+                    legend: {
+                        enabled: false,
+                        itemStyle: {
+                            color: '#fff'
                         }
                     },
-                    gridLineColor: '#333', //网格线样式
-                    tickAmount: 7 //显示刻度数
-                },
-                tooltip: {
-                    split: true,
-                    valueSuffix: ''
-                },
-                plotOptions: {
-                    area: {
-                        stacking: 'normal',
-                        lineColor: '#fff',
-                        lineWidth: 1,
-                        marker: {
+                    xAxis: {
+                        categories: ['0', '4', '8', '12', '16', '20', '24'],
+                        tickmarkPlacement: 'on',
+                        title: {
+                            enabled: false
+                        },
+                        labels: {
+                            enabled: false //不显示横坐标
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        },
+                        labels: {
+                            formatter: function() {
+                                // return this.value;
+                                return '<div style="color:#fff">' + this.value + '</div>'
+                            }
+                        },
+                        gridLineColor: '#333', //网格线样式
+                        tickAmount: 7 //显示刻度数
+                    },
+                    tooltip: {
+                        split: true,
+                        valueSuffix: ''
+                    },
+                    plotOptions: {
+                        area: {
+                            stacking: 'normal',
+                            lineColor: '#fff',
                             lineWidth: 1,
-                            lineColor: '#fff'
+                            marker: {
+                                lineWidth: 1,
+                                lineColor: '#fff'
+                            }
                         }
-                    }
+                    },
+                    series: []
                 },
-                series: [{
-                    name: 'links',
-                    data: [30, 30, 30, 40, 50, 60, 70],
-                    color: '#50ddbd'
-                }]
-            }
-    let performanceType_option ={
-                chart: {
-                    backgroundColor: 'none',
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    marginLeft: 0,
-                    marginRight: 20,
-                    marginTop:40
-                },
+        this.$service.warnday(this.type,this.params)
+        .then(function(res){
+          console.log(res)
+            self.day_option.series=res
+            self.day_option.series[0].color="#50ddbd"
+            self.$refs.day.CreateNow()
+        }).catch(function(err){
+          console.log('获取性能告警趋势失败!')
+        })
+      },
+      getType(){
+        let self = this
+        this.type_option ={
+                    chart: {
+                        backgroundColor: 'none',
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        marginLeft: 0,
+                        marginRight: 20,
+                        marginTop:40
+                    },
                 title: {
-                    text: '当日HTTPQ请求类型统计',
+                    text: '当天WAF攻击级别统计',
                     floating: true,
                     style: {
                         color: '#fff'
@@ -226,18 +275,6 @@
                         },
                         point: {
                             events: {
-                                // mouseOver: function(e) { // 鼠标滑过时动态更新标题
-                                //     // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                                //     chart.setTitle({
-                                //         text: e.target.name + '\t' + e.target.y + ' %'
-                                //     });
-                                // }
-                                //,
-                                // click: function(e) { // 同样的可以在点击事件里处理
-                                //     chart.setTitle({
-                                //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                                //     });
-                                // }
                             }
                         },
                     }
@@ -245,25 +282,41 @@
                 series: [{
                     type: 'pie',
                     innerSize: '80%',
-                    data: [
-                        { name: '同一服务器3分钟内平均cpu超过80％', color: '#fabd2a', y: 50},
-                        { name: '同一服务器3分钟内平均内存超过80％', color: '#76d4f2', y: 15 },
-                        { name: '同一服务器单个进程内存超过50％', color: '#818de8', y: 15 },
-                        { name: '同一服务器磁盘使用超过80％', color: '#52dabd', y: 15 },
-                        { name: 'http异常返回状态', color: '#e95658', y:5}
-                    ]
+                    data: []
                 }]
             }
-    return {
-      performance_chart: 'monitor_performance',
-      performance_option,
-      performanceType_chart: 'monitor_performanceType',
-      performanceType_option
-    }
+        this.$service.warntype(this.type,this.params)
+        .then(function(res){
+            self.type_option.series[0].data=res
+            self.type_option.series[0].data[0].color="#fabd2a"
+            self.type_option.series[0].data[1].color="#76d4f2"
+            self.type_option.series[0].data[2].color="#818de8"
+            self.type_option.series[0].data[3].color="#52dabd"
+            self.type_option.series[0].data[4].color="#e95658"
+          self.$refs.type.CreateNow()
+        }).catch(function(err){
+          console.log('获取性能告警类型统计失败!')
+        })
+      },
+      getEvent(){
+        let self = this
+        this.$service.warnevent(this.type,this.params)
+        .then(function(res){
+          self.events=res
+        }).catch(function(err){
+          console.log('获取性能告警列表失败!')
+        })
+      },
+    },
+    watch:{
+      'startTime.time':function(val,oldVal){
+        this.search()
+      }
     },
     components: {
       XChart,
-      CChart
+      CChart,
+      'date-picker': myDatepicker
     }
   }
 </script>

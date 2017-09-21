@@ -1,11 +1,11 @@
 <template>
 <div class="content-wrapper">
   <section class="content-header">
-    <h1> 内网边界监控 </h1>
+    <h1> 安全防御监控 </h1>
     <ol class="breadcrumb">
       <li>  <router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link></li>
       <li class=""><a href="javascript:;">安全监控</a></li>
-      <li class="active">内网边界监控</li>
+      <li class="active">安全防御监控</li>
     </ol>
   </section>
   <section class="content">

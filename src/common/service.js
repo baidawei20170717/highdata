@@ -423,11 +423,49 @@ Vue.prototype.$service = {
   userabnLinuxDay(params) {
       //return api.post('security/user/abn/linux/day', params)
       return api.post('security/user/linuxday.json', params)
-  }
+  },
 
 
   /*--------------------------------------------------告警监控---------------------------------------------------*/
-  
-
+  //当天告警总数
+  warncount(type, params) {
+      //return api.post('warn/' + type + '/count', params)
+      return api.post('warn/' + type + '/count.json', params)
+  },
+  //当天性能告警趋势
+  warnday(type, params) {
+      //return api.post('warn/' + type + '/day', params)
+      return api.post('warn/' + type + '/day.json', params)
+  },
+  //当天性能告警类型统计
+  warntype(type, params) {
+      //return api.post('warn/' + type + '/type', params){
+      return api.post('warn/' + type + '/type.json', params)
+  },
+  //当天性能告警列表
+  warnevent(type, params) {
+      //return api.post('warn/' + type + '/event', params)
+      return api.post('warn/' + type + '/event.json', params)
+  },
+  //告警描述信息
+  warnsingleBasic(type, id, params) {
+      //return api.post('warn/' + type + '/' + id + '/basic', params)
+      return api.post('warn/' + type + '/idbasic.json', params)
+  },
+  //当天告警总数
+  warnsingleCount(type, id, params) {
+      //return api.post('warn/' + type + '/' + id + '/count', params)
+      return api.post('warn/' + type + '/idcount.json', params)
+  },
+  //当天告警趋势
+  warnsingleDay(type, id, params) {
+      //return api.post('warn/' + type + '/' + id + '/day', params)
+      return api.post('warn/' + type + '/idday.json', params)
+  },
+  //当天告警明细列表
+  warnsingleEvent(type, id, params) {
+      //return api.post('warn/' + type + '/' + id + '/event', params)
+      return api.post('warn/' + type + '/idevent.json', params)
+  }
 
 }

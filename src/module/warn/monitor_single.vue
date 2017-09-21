@@ -1,7 +1,7 @@
 <template>
 <div class="content-wrapper">
 <section class="content-header">
-  <h1> {{ ip }} </h1>
+  <h1> {{ id }} </h1>
   <ol class="breadcrumb">
     <li>
       <router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link>
@@ -10,7 +10,7 @@
     <li>
       <router-link to="/">性能告警</router-link>
     </li>
-    <li class="active"> {{ ip }} </li>
+    <li class="active"> {{ id }} </li>
   </ol>
 </section>
   <section class="content">
@@ -42,10 +42,10 @@
       <div class="right-icon"></div>
       <div class="row">
         <div class="col-lg-6 col-xs-12">
-          <div class="item">规则标示： 84848 </div>
+          <div class="item">规则标示： {{basic.id}} </div>
         </div>
         <div class="col-lg-6 col-xs-12">
-          <div class="item">规则名称： 93939 </div>
+          <div class="item">规则名称： {{basic.name}} </div>
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@
             <br>
             <br>
             <p>当天告警总数</p>
-            <p class="text-size60 text-76d4f2">45678</p>
+            <p class="text-size60 text-76d4f2">{{count}}</p>
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-            <x-chart :id="performance_chart" :option="performance_option" :css="300"></x-chart>
+            <x-chart :id="day_chart" :option="day_option" ref="day" :css="300"></x-chart>
           </div>
         </div>
       </div>
@@ -92,11 +92,11 @@
                   <th width="20%">告警IP</th>
                   <th>告警信息</th>
                 </tr>
-                <tr>
-                  <td>2017-09-06 12:23：59 000</td>
-                  <td>http异常返回状态</td>
-                  <td>10.1.5.6</td>
-                  <td>10.1.234.645 －－ jrogwughdfvwortruwp［834509384hihvbdhvoshdfvglfbhlv］</td>
+                <tr v-for="item in events">
+                  <td>{{item['@timestamp'] | dateFormat}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.host}}</td>
+                  <td>{{item.message}}</td>
                 </tr>
               </table>
             </div>
@@ -109,87 +109,160 @@
 </template>
 
 <script type="es6">
+  import myDatepicker from '@/components/datepicker.vue'
   import XChart from '@/components/chat'
+  import CChart from '@/components/cirChart'
   export default {
-    name: 'monitor',
-    mounted (){
-      commonCtrl.init();
+    name: 'monitor_single',
+    created (){
+      this.search()
     },
     data() {
-    let performance_option ={
-                chart: {
-                    backgroundColor: 'none',
-                    type: 'line',
-                    marginLeft: 60,
-                    marginRight: 20
-                },
-                title: {
-                    text: '当天告警趋势',
-                    align: 'left',
-                    style: {
-                        color: '#fff'
+      return {
+        startTime: {
+          time: this.$moment().format('YYYY-MM-DD')
+        },
+        limit:[],
+        params : {
+          startTime: '',
+          endTime: '',
+          search: '*'
+        },
+        type:'performance',
+        id:this.$route.params.id,
+        basic:{},
+        count:0,
+        events:{},
+        day_chart: 'monitorSingle_performance',
+        day_option:{}
+      }
+    },
+    methods:{
+      search(){
+        let date = this.startTime.time
+        this.params.startTime = this.$moment(date).format('x')
+        this.params.endTime =this.$moment(date).add(1, 'd').format('x')
+
+        this.getBasic()
+        this.getCount()
+        this.getDay()
+        this.getEvent()
+      },
+      getBasic(){
+        let self = this
+        this.$service.warnsingleBasic(this.type,this.params)
+        .then(function(res){
+          self.basic = res
+        }).catch(function(err){
+          console.log('获取基本信息失败!')
+        })
+      },
+      getCount(){
+        let self = this
+        this.$service.warnsingleCount(this.type,this.params)
+        .then(function(res){
+          self.count = res
+        }).catch(function(err){
+          console.log('获取当日告警数量失败!')
+        })
+      },
+      getDay(){
+        let self = this
+        this.day_option ={
+                    chart: {
+                        backgroundColor: 'none',
+                        type: 'line',
+                        marginLeft: 60,
+                        marginRight: 20
                     },
-                    x: 20,
-                    y: 30,
-                    margin: 40
-                },
-                legend: {
-                    enabled: false,
-                    itemStyle: {
-                        color: '#fff'
-                    }
-                },
-                xAxis: {
-                    categories: ['0', '4', '8', '12', '16', '20', '24'],
-                    tickmarkPlacement: 'on',
                     title: {
-                        enabled: false
+                        text: '当天告警趋势',
+                        align: 'left',
+                        style: {
+                            color: '#fff'
+                        },
+                        x: 20,
+                        y: 30,
+                        margin: 40
                     },
-                    labels: {
-                        enabled: false //不显示横坐标
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: ''
-                    },
-                    labels: {
-                        formatter: function() {
-                            // return this.value;
-                            return '<div style="color:#fff">' + this.value + '</div>'
+                    legend: {
+                        enabled: false,
+                        itemStyle: {
+                            color: '#fff'
                         }
                     },
-                    gridLineColor: '#333', //网格线样式
-                    tickAmount: 7 //显示刻度数
-                },
-                tooltip: {
-                    split: true,
-                    valueSuffix: ''
-                },
-                plotOptions: {
-                    area: {
-                        stacking: 'normal',
-                        lineColor: '#fff',
-                        lineWidth: 1,
-                        marker: {
+                    xAxis: {
+                        categories: ['0', '4', '8', '12', '16', '20', '24'],
+                        tickmarkPlacement: 'on',
+                        title: {
+                            enabled: false
+                        },
+                        labels: {
+                            enabled: false //不显示横坐标
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        },
+                        labels: {
+                            formatter: function() {
+                                // return this.value;
+                                return '<div style="color:#fff">' + this.value + '</div>'
+                            }
+                        },
+                        gridLineColor: '#333', //网格线样式
+                        tickAmount: 7 //显示刻度数
+                    },
+                    tooltip: {
+                        split: true,
+                        valueSuffix: ''
+                    },
+                    plotOptions: {
+                        area: {
+                            stacking: 'normal',
+                            lineColor: '#fff',
                             lineWidth: 1,
-                            lineColor: '#fff'
+                            marker: {
+                                lineWidth: 1,
+                                lineColor: '#fff'
+                            }
                         }
-                    }
-                },
-                series: [{
-                    name: 'links',
-                    data: [30, 30, 30, 40, 50, 60, 70],
-                    color: '#50ddbd'
-                }]
-            }
-    return {
-      performance_chart: 'monitorSingle_performance',
-      performance_option
-    }
+                    },
+                    series: [{
+                        name: 'links',
+                        data: [30, 30, 30, 40, 50, 60, 70],
+                        color: '#50ddbd'
+                    }]
+                }
+        this.$service.warnsingleDay(this.type,this.params)
+        .then(function(res){
+          self.day_option.series=res
+          self.day_option.series[0].color="#50ddbd"
+          self.$refs.day.CreateNow()
+        }).catch(function(err){
+          console.log('获取当日告警趋势失败!')
+        })
+      },
+      getEvent(){
+        let self = this
+        this.$service.warnsingleEvent(this.type,this.params)
+        .then(function(res){
+          self.events=res
+        }).catch(function(err){
+          console.log('获取当日告警列表失败!')
+        })
+      },
+    },
+    watch:{
+      'startTime.time':function(val,oldVal){
+        this.search()
+      }
     },
     components: {
-      XChart
+      XChart,
+      CChart,
+      'date-picker': myDatepicker
     }
   }
 </script>

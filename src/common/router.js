@@ -216,6 +216,7 @@ export default new Router({
       }
     },
     {
+      name:'warn_monitor_single',
       path: '/warn/monitor/:id',
       components: {
         header: AppHeader,
@@ -238,6 +239,7 @@ export default new Router({
       }
     },
     {
+      name:'warn_security_single',
       path: '/warn/security/:id',
       components: {
         header: AppHeader,
