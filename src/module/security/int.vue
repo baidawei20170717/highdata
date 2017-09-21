@@ -309,13 +309,13 @@
         this.$service.inconnStatus(this.params)
         .then(function(res){
           self.connStatus_option.series=res
-          self.ddosType_option.series[0].color="#53ddbf"
-          self.ddosType_option.series[1].color="#56c0e8"
-          self.ddosType_option.series[2].color="#90e982"
+          self.connStatus_option.series[0].color="#53ddbf"
+          self.connStatus_option.series[1].color="#56c0e8"
+          self.connStatus_option.series[2].color="#90e982"
           self.$refs.connStatus.CreateNow()
         }).catch(function(err){
+          console.log(err)
           console.log('获取当天连接状态失败!')
-          self.$refs.connStatus.CreateNow()
         })
       },
       getAttackTypeTop(){

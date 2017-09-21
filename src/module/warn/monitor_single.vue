@@ -1,37 +1,41 @@
 <template>
 <div class="content-wrapper">
-  <section class="content-header">
-    <h1> 10.1.6.175</h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
-      <li class=""><a href="#">告警监控</a></li>
-      <li class=""><a href="#">性能告警</a></li>
-      <li class="active">10.1.6.175</li>
-    </ol>
-  </section>
+<section class="content-header">
+  <h1> {{ ip }} </h1>
+  <ol class="breadcrumb">
+    <li>
+      <router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link>
+    </li>
+    <li><a href="javascript:;">告警监控</a></li>
+    <li>
+      <router-link to="/">性能告警</router-link>
+    </li>
+    <li class="active"> {{ ip }} </li>
+  </ol>
+</section>
   <section class="content">
-    <div class="is-search row-base-style">
-      <div class="left-icon"></div>
-      <div class="right-icon"></div>
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <div class="input-group date">
-            <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control pull-right" placeholder="日期" id="datepicker">
+  <div class="is-search row-base-style" v-show="this.$store.state.isSearch">
+    <div class="left-icon"></div>
+    <div class="right-icon"></div>
+    <div class="row">
+      <div class="col-lg-3 col-xs-6">
+        <div class="input-group date">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
           </div>
+          <date-picker :date="startTime" :limit="limit"></date-picker>
         </div>
-        <div class="col-lg-9 col-xs-12">
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn"> <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
-            </div>
-          </form>
+      </div>
+      <div class="col-lg-9 col-xs-12">
+        <div class="sidebar-form">
+          <div class="input-group">
+            <input type="text" v-model='params.search' class="form-control" placeholder="请输入搜索内容">
+            <span class="input-group-btn"> <button @click='search' type="button" name="search" class="btn btn-flat"><i class="fa fa-search"></i> </button> </span>
+          </div>
         </div>
       </div>
     </div>
+  </div>
     <div class="row-base-style text-center is-info-row is-info-row2">
       <div class="title">当日关注</div>
       <div class="left-icon"></div>

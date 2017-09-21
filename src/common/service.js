@@ -354,23 +354,80 @@ Vue.prototype.$service = {
   twflowDay(params) {
       //return api.post('security/tw/flowday', params)
       return api.post('security/tw/flowday.json', params)
-  }
+  },
 
   /*--------------------------------------------------系统安全监控---------------------------------------------------*/
+  //当天windows事件量
+  syswinCount(params) {
+      //return api.post('security/sys/win/count', params
+      return api.post('security/sys/wincount.json', params)
+  },
 
+  //当天linux事件量
+  syslinuxCount(params) {
+      //return api.post('security/sys/linux/count', params)
+      return api.post('security/sys/linuxcount.json', params)
+  },
+
+  //当天windows日志趋势
+  syswinDay(params) {
+      //return api.post('security/sys/win/day', params)
+      return api.post('security/sys/winday.json', params)
+  },
+
+  //当天linux日志趋势
+  syslinuxDay(params) {
+      //return api.post('security/sys/linux/day', params)
+      return api.post('security/sys/linuxday.json', params)
+  },
+
+  //当天windows事件级别统计
+  syswinLevel(params) {
+      //return api.post('security/sys/win/level', params)
+      return api.post('security/sys/winlevel.json', params)
+  },
+
+  //当天linux事件级别统计
+  syslinuxLevel(params) {
+      //return api.post('security/sys/linux/level', params)
+      return api.post('security/sys/linuxlevel.json', params)
+  },
+
+
+  /*--------------------------------------------------用户访问监控---------------------------------------------------*/
+  //当天登录失败统计
+  usercount(params) {
+      //return api.post('security/user/count', params)
+      return api.post('security/user/count.json', params)
+  },
+
+  //当天windows登录失败目标IP TOP统计
+  userabnWinDisipTop(params) {
+      //return api.post('security/user/abn/win/disip/top', params)
+      return api.post('security/user/windisiptop.json', params)
+  },
+
+  //当天linux登录失败目标IP TOP统计
+  userabnLinuxDisipTop(params) {
+      //return api.post('security/user/abn/linux/disip/top', params)
+      return api.post('security/user/linuxdisiptop.json', params)
+  },
+
+  //当天windows登录失败趋势
+  userabnWinDay(params) {
+      //return api.post('security/user/abn/win/day', params)
+      return api.post('security/user/winday.json', params)
+  },
+
+  //当天linux登录失败趋势
+  userabnLinuxDay(params) {
+      //return api.post('security/user/abn/linux/day', params)
+      return api.post('security/user/linuxday.json', params)
+  }
+
+
+  /*--------------------------------------------------告警监控---------------------------------------------------*/
   
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
