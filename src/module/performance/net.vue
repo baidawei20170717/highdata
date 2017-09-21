@@ -99,13 +99,11 @@ export default {
       })
     },
     search (){
-      this.Items =[{"islastData":"TRUE","ip":"172.17.0.31","name":"三合一（IPS/WAF/UAG）","type":"DPX 8000-A5"},{"islastData":"TRUE","ip":"172.16.0.103","name":"抗DDOS","type":"Guard3000-GE"},{"islastData":"TRUE","ip":"10.1.5.254","name":"安全区防火墙","type":"H3C NS-SecPathF5020"},{"islastData":"FALSE","ip":"10.1.90.1","name":"DMZ区VPN","type":"H3C  NS-SecPathF5020"},{"islastData":"TRUE","ip":"10.1.17.2","name":"华为防火墙","type":"USG5530"},{"islastData":"TRUE","ip":"172.17.0.11","name":"网神防火墙","type":"SecGate3600"},{"islastData":"FALSE","ip":"172.17.0.12","name":"网神防火墙","type":"SecGate3600"},{"islastData":"FALSE","ip":"172.16.0.11","name":"负载均衡","type":"ADX3000-GC-1"},{"islastData":"FALSE","ip":"172.16.0.101","name":"上联交换机","type":"\tS5500-1"},{"islastData":"FALSE","ip":"172.16.0.102","name":"下联交换机","type":"\tS5500-2"},{"islastData":"FALSE","ip":"10.1.88.200","name":"DMZ区交换机","type":"S5500"},{"islastData":"FALSE","ip":"10.10.1.2","name":"核心交换机","type":"H3C S7506E-1"},{"islastData":"FALSE","ip":"10.1.6.249","name":"服务器接入交换机 1","type":"华为 S5700-1"},{"islastData":"FALSE","ip":"10.1.6.250","name":"服务器接入交换机 2","type":"H3C  S7503E-1"},{"islastData":"FALSE","ip":"10.1.6.247","name":"虚拟化接入交换机1","type":"H3C  S7503E-2"}]
       let self = this
-      this.$http.post('performance/net/monitor', {
-        search:this.search
-        }).then(function(res){
-          self.Items = res.data
-          self.selectOrder
+      this.$service.netmonitor(this.params)
+      .then(function(res){
+          self.Items = res
+          self.selectOrder()
         }).catch(function(err){
           console.log('获取网络设备监控列表失败!')
         })

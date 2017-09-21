@@ -526,7 +526,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日打开表格趋势',
+                        text: '当日打开文件趋势',
                         align: 'left',
                         style: {
                             color: '#fff'

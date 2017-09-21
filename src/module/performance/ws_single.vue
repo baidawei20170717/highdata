@@ -427,13 +427,12 @@
                             style: {
                                 color: '#ffffff' || 'black'
                             }
-                        },
+                        }
                     }
                 },
                 series: [{
                     type: 'pie',
                     innerSize: '80%',
-
                     data: []
                 }]
             }
