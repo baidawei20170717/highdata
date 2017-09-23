@@ -390,7 +390,7 @@
           self.methodRand_option.series[0].data = res
           self.methodRand_option.series[0].data[0].color = '#fabd2a'
           self.methodRand_option.series[0].data[1].color = '#76d4f2'
-          self.methodRand_option.series[0].data[2].color = '#818de8'
+          // self.methodRand_option.series[0].data[2].color = '#818de8'
           self.$refs.methodRand.CreateNow()
         }).catch(function(err){
           console.log('获取当日HTTP请求类型失败!')

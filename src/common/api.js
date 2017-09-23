@@ -18,10 +18,11 @@ function checkStatus (response) {
     return response.data
   }
   // 异常状态下，把错误信息返回去
-  return {
-    status: -404,
-    msg: '网络异常'
-  }
+  // return {
+  //   status: -404,
+  //   msg: '网络异常'
+  // }
+  return 0
 }
 //检查状态码
 function checkCode (res) {
@@ -35,52 +36,10 @@ export default {
   post (url, data) {
     return axios({
       method: 'post',
-      baseURL: '/api/', //test
-      // baseURL: '/highdata/',
-      url,
-      data: data,
-      timeout: 100000,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/x-www-form-urlencoded' //
-      }
-    }).then(
-      (response) => {
-        return checkStatus(response)
-      }
-    ).then(
-      (res) => {
-        return checkCode(res)
-      }
-    )
-  },
-  put (url, data) {
-    return axios({
-      method: 'put',
+      // baseURL: '/api/',
       baseURL: '/highdata/',
       url,
-      data,
-      timeout: 100000,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json'
-      }
-    }).then(
-      (response) => {
-        return checkStatus(response)
-      }
-    ).then(
-      (res) => {
-        return checkCode(res)
-      }
-    )
-  },
-  get (url, params) {
-    return axios({
-      method: 'get',
-      baseURL: '/api/',
-      url,
-      params,
+      data: data,
       timeout: 100000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',

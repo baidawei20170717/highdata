@@ -77,8 +77,7 @@
         this.disabledBtn = true
         var params = {
           username: this.useraccount,
-          password: this.password,
-          remember: this.rememberme
+          password: this.password
         }
         let self = this
         this.$service.login(params)

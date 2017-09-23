@@ -323,76 +323,88 @@
       getWinLevel(){
         let self = this
         this.winLevel_option ={
-                    chart: {
-                        backgroundColor: 'none',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: '当天windows事件级别统计',
-                        floating: true,
-                        style: {
-                            color: '#fff'
-                        }
+                        chart: {
+                            type: 'pie',
+                            backgroundColor: 'none',
+                            marginLeft: 60,
+                            marginRight: 20
 
-                    },
-                    legend: {
-                        // layout:'vertical',
-                        // align:'right',
-                        // verticalAlign:'middle',
-                        itemStyle: {
-                            color: '#fff'
-                        }
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            borderColor: 'none',
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            showInLegend: true,
+                        },
+                        title: {
+                            text: '当天windows事件级别统计',
+                            align: 'left',
+                            style: {
+                                color: '#fff'
+                            },
+                            x: 20,
+                            y: 30,
+                            margin: 40
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        yAxis: {
+                            title: {
+                                text: '总百分比市场份额'
+                            }
+                        },
+                        plotOptions: {
+                            pie: {
+                                showInLegend: true,
+                                shadow: false,
+                                center: ['50%', '50%'],
+                                dataLabels: {
+                                    color: '#fff'
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: true,
+                            itemStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: '%'
+                        },
+                        series: [{
+                            name: 'http请求',
+                            data: [],
+                            size: '60%',
                             dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: '#ffffff' || 'black'
+                                formatter: function() {
+                                    return this.y > 5 ? this.point.name : null;
+                                },
+                                color: 'white',
+                                distance: -30
+                            }
+                        }, {
+                            name: '版本',
+                            data: [],
+                            size: '80%',
+                            innerSize: '60%',
+                            dataLabels: {
+                                formatter: function() {
+                                    // 大于1则显示
+                                    return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + '%' : null;
                                 }
-                            },
-                            point: {
-                                events: {
-                                    // mouseOver: function(e) { // 鼠标滑过时动态更新标题
-                                    //     // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                                    //     chart.setTitle({
-                                    //         text: e.target.name + '\t' + e.target.y + ' %'
-                                    //     });
-                                    // }
-                                    //,
-                                    // click: function(e) { // 同样的可以在点击事件里处理
-                                    //     chart.setTitle({
-                                    //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                                    //     });
-                                    // }
-                                }
-                            },
-                        }
+                            }
+                        }]
                     },
-                    series: [{
-                        type: 'pie',
-                        innerSize: '80%',
-                        data: []
-                    }]
-                },
         this.$service.syswinLevel(this.params)
         .then(function(res){
-          self.winLevel_option.series[0].data=res
+          self.winLevel_option.series[0].data=res.log_name
+          self.winLevel_option.series[1].data=res.level
           self.winLevel_option.series[0].data[0].color="#fabd2a"
           self.winLevel_option.series[0].data[1].color="#76d4f2"
-          self.winLevel_option.series[0].data[2].color="#818de8"
-          self.winLevel_option.series[0].data[3].color="#52dabd"
-          self.winLevel_option.series[0].data[4].color="#e95658"
+          self.winLevel_option.series[0].data[2].color="#51d8bc"
+          self.winLevel_option.series[1].data[0].color="rgb(255,240,93)"
+          self.winLevel_option.series[1].data[1].color="rgb(255,223,76)"
+          self.winLevel_option.series[1].data[2].color="rgb(255,206,59)"
+          self.winLevel_option.series[1].data[3].color="rgb(169,255,255)"
+          self.winLevel_option.series[1].data[4].color="rgb(152,246,255)"
+          self.winLevel_option.series[1].data[5].color="rgb(135,229,255)"
+          self.winLevel_option.series[1].data[6].color="rgb(132,255,239)"
           self.$refs.winLevel.CreateNow()
         }).catch(function(err){
           console.log('获取windows级别统计失败!')
@@ -409,7 +421,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: '当天windows事件级别统计',
+                        text: '当天Linux事件级别统计',
                         floating: true,
                         style: {
                             color: '#fff'

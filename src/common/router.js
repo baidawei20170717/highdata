@@ -47,7 +47,7 @@ export default new Router({
       }
     },
     {
-      path: '/Performance/db',
+      path: '/performance/db',
       components: {
         header: AppHeader,
         aside: AppAside,
@@ -59,7 +59,7 @@ export default new Router({
     },
     {
       name: 'db_single',
-      path: '/Performance/db/:id',
+      path: '/performance/db/:id',
       components: {
         header: AppHeader,
         aside: AppAside,
@@ -249,10 +249,11 @@ export default new Router({
       meta:{
         auth: true //需要校验
       }
-    },
-    {
-      path:'*',
-      component: {template:'<div style="font-size:48px;color:#fff">404</div>'}
     }
+    // ,
+    // {
+    //   path:'*',
+    //   component: {template:'<div style="font-size:48px;color:#fff">404</div>'}
+    // }
   ]
 })

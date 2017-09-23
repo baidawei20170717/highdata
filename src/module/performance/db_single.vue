@@ -284,7 +284,7 @@
                 }
         this.$service.dbmysqlDay(this.ip,this.params)
         .then(function(res){
-          self.mysqlDay_option.series = res
+          self.mysqlDay_option.series[0] = res
           self.mysqlDay_option.series[0].color = '#53ddbf'
           self.mysqlDay_option.series[1].color = '#56c0e8'
           self.mysqlDay_option.series[2].color = '#facc2a'
@@ -319,14 +319,18 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
-                        }
+
+                                            type: 'datetime',
+                                            dateTimeLabelFormats: {
+                                                millisecond: '%H:%M:%S.%L',
+                                                second: '%H:%M:%S',
+                                                minute: '%H:%M',
+                                                hour: '%H:%M',
+                                                day: '%m-%d',
+                                                week: '%m-%d',
+                                                month: '%Y-%m',
+                                                year: '%Y'
+                                            }
                     },
                     yAxis: {
                         title: {
@@ -393,14 +397,19 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
-                        }
+
+
+                                                                    type: 'datetime',
+                                                                    dateTimeLabelFormats: {
+                                                                        millisecond: '%H:%M:%S.%L',
+                                                                        second: '%H:%M:%S',
+                                                                        minute: '%H:%M',
+                                                                        hour: '%H:%M',
+                                                                        day: '%m-%d',
+                                                                        week: '%m-%d',
+                                                                        month: '%Y-%m',
+                                                                        year: '%Y'
+                                                                    }
                     },
                     yAxis: {
                         title: {
@@ -467,14 +476,17 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
-                        }
+                                                                type: 'datetime',
+                                                                dateTimeLabelFormats: {
+                                                                    millisecond: '%H:%M:%S.%L',
+                                                                    second: '%H:%M:%S',
+                                                                    minute: '%H:%M',
+                                                                    hour: '%H:%M',
+                                                                    day: '%m-%d',
+                                                                    week: '%m-%d',
+                                                                    month: '%Y-%m',
+                                                                    year: '%Y'
+                                                                }
                     },
                     yAxis: {
                         title: {
@@ -541,14 +553,17 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
-                        }
+                                                                type: 'datetime',
+                                                                dateTimeLabelFormats: {
+                                                                    millisecond: '%H:%M:%S.%L',
+                                                                    second: '%H:%M:%S',
+                                                                    minute: '%H:%M',
+                                                                    hour: '%H:%M',
+                                                                    day: '%m-%d',
+                                                                    week: '%m-%d',
+                                                                    month: '%Y-%m',
+                                                                    year: '%Y'
+                                                                }
                     },
                     yAxis: {
                         title: {

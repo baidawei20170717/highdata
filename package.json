@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
+    "gojs": "^1.7.25",
     "highcharts": "^5.0.14",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

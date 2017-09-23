@@ -331,11 +331,11 @@
               title: {
                   text: null
               },
-              // labels: {
-              //     formatter: function() {
-              //         return '<div style="color:#fff">' + (this.value/8/1024/1024/1024).toFixed(2) + 'GB</div>'
-              //     }
-              // },
+              labels: {
+                  formatter: function() {
+                      return '<div style="color:#fff">' + (this.value/1024/1024/1024).toFixed(2) + 'GB</div>'
+                  }
+              },
               gridLineColor: '#333', //网格线样式
               tickAmount: 7 //显示刻度数
           },
