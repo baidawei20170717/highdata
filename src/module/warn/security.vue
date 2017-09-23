@@ -217,7 +217,6 @@
                 },
         this.$service.warnday(this.type,this.params)
         .then(function(res){
-          console.log(res)
             self.day_option.series=res
             self.day_option.series[0].color="#50ddbd"
             self.$refs.day.CreateNow()
@@ -288,13 +287,9 @@
         this.$service.warntype(this.type,this.params)
         .then(function(res){
             self.type_option.series[0].data=res
-            self.type_option.series[0].data[0].color="#fabd2a"
-            self.type_option.series[0].data[1].color="#76d4f2"
-            self.type_option.series[0].data[2].color="#818de8"
-            self.type_option.series[0].data[3].color="#52dabd"
-            self.type_option.series[0].data[4].color="#e95658"
           self.$refs.type.CreateNow()
         }).catch(function(err){
+        console.log(err)
           console.log('获取当天安全告警类型统计失败!')
         })
       },

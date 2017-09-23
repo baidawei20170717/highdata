@@ -408,7 +408,7 @@
                 },
                 series: []
             }
-        this.$service.userabnWinDay(this.ip,this.params)
+        this.$service.userabnWinDay(this.params)
         .then(function(res){
           self.abnWinDay_option.series[0]=res
           self.abnWinDay_option.series[0].color="#76d4f2"
@@ -495,7 +495,7 @@
                     color: '#2effd2'
                 }]
             }
-        this.$service.userabnLinuxDay(this.ip,this.params)
+        this.$service.userabnLinuxDay(this.params)
         .then(function(res){
           self.abnLinuxDay_option.series[0]=res
           self.abnLinuxDay_option.series[0].color="#2effd2"

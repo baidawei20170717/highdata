@@ -174,27 +174,27 @@ Vue.prototype.$service = {
 
   //外网边界监控-当天DDOS事件总数
   exddosCount(params) {
-    return http.post('security/ex/ddos/count', params)
+    return api.post('security/ex/ddos/count', params)
   },
 
   //当天DDOS事件趋势
   exddosDay(params) {
-    return http.post('security/ex/ddos/day', params)
+    return api.post('security/ex/ddos/day', params)
   },
 
   //当天DDOS攻击类型统计
   exddosType(params) {
-    return http.post('security/ex/ddos/type', params)
+    return api.post('security/ex/ddos/type', params)
   },
 
   //当天DDOS目标端口统计
   exddosDisport(params) {
-    return http.post('security/ex/ddos/disport', params)
+    return api.post('security/ex/ddos/disport', params)
   },
 
   //最近DDOS事件
   exevent(params) {
-    return http.post('security/ex/event', params)
+    return api.post('security/ex/ddos/now', params)
   },
 
 
@@ -266,7 +266,7 @@ Vue.prototype.$service = {
 
   //当天WAF源IP TOP统计
   wafSrcipTop(params) {
-    //  return api.post('security/def/waf/srcip/top', params)
+    return api.post('security/def/waf/srcip/top', params)
   },
 
   //当天WAF攻击目标端口TOP统计

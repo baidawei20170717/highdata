@@ -322,7 +322,6 @@
             self.wafAttackLevel_option.series[0].data[0].color="#51d8bc"
             self.wafAttackLevel_option.series[0].data[1].color="#00d2ff"
             self.wafAttackLevel_option.series[0].data[2].color="#90e982"
-            self.wafAttackLevel_option.series[0].data[3].color="#f8a461"
           self.$refs.wafAttackLevel.CreateNow()
         }).catch(function(err){
           console.log('获取当天连接状态失败!')
@@ -572,9 +571,9 @@
         .then(function(res){
             self.ibmaType_option.series[0].data=res
             self.ibmaType_option.series[0].data[0].color="#51d8bc"
-            self.ibmaType_option.series[0].data[1].color="#00d2ff"
           self.$refs.ibmaType.CreateNow()
         }).catch(function(err){
+        console.log(err)
           console.log('获取当天上网行为协议类型统计失败!')
         })
       },

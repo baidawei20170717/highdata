@@ -217,7 +217,6 @@
                 },
         this.$service.warnday(this.type,this.params)
         .then(function(res){
-          console.log(res)
             self.day_option.series=res
             self.day_option.series[0].color="#50ddbd"
             self.$refs.day.CreateNow()

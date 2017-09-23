@@ -158,7 +158,7 @@
         this.getDdosDay()
         this.getDdosType()
         this.getDdosDisport()
-        this.getExevent()
+        this.getddosNow()
       },
       getDdosCount(){
         let self = this
@@ -397,7 +397,7 @@
           console.log('获取目标端口统计失败!')
         })
       },
-      getExevent(){
+      getddosNow(){
         let self = this
         this.$service.exevent(this.params)
         .then(function(res){

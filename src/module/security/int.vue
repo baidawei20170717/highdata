@@ -373,7 +373,7 @@
           self.attackTypeTop_option.series[0].data=res
           self.attackTypeTop_option.series[0].data[0].color="#51d8bc"
           self.attackTypeTop_option.series[0].data[1].color="#818de8"
-          self.attackTypeTop_option.series[0].data[2].color="#f8a461"
+          // self.attackTypeTop_option.series[0].data[2].color="#f8a461"
           self.$refs.attackTypeTop.CreateNow()
         }).catch(function(err){
           console.log('获取当天攻击类型TOP统计失败!')
@@ -578,9 +578,6 @@
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 },
                 legend: {
-                    // layout:'vertical',
-                    // align:'right',
-                    // verticalAlign:'middle',
                     itemStyle: {
                         color: '#fff'
                     }
@@ -600,18 +597,6 @@
                         showInLegend:true,
                         point: {
                             events: {
-                                // mouseOver: function(e) { // 鼠标滑过时动态更新标题
-                                //     // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                                //     chart.setTitle({
-                                //         text: e.target.name + '\t' + e.target.y + ' %'
-                                //     });
-                                // }
-                                //,
-                                // click: function(e) { // 同样的可以在点击事件里处理
-                                //     chart.setTitle({
-                                //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                                //     });
-                                // }
                             }
                         },
                     }
@@ -630,7 +615,6 @@
           self.disportTop_option.series[0].data[2].color="#90e982"
           self.disportTop_option.series[0].data[3].color="#f8a461"
           self.disportTop_option.series[0].data[4].color="#404046"
-          self.disportTop_option.series[0].data[5].color="#818de8"
           self.$refs.disportTop.CreateNow()
         }).catch(function(err){
           console.log('当天受攻击端口TOP统计!')

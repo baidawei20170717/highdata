@@ -150,7 +150,7 @@
       },
       getBasic(){
         let self = this
-        this.$service.warnsingleBasic(this.type,this.params)
+        this.$service.warnsingleBasic(this.type,this.id,this.params)
         .then(function(res){
           self.basic = res
         }).catch(function(err){
@@ -159,7 +159,7 @@
       },
       getCount(){
         let self = this
-        this.$service.warnsingleCount(this.type,this.params)
+        this.$service.warnsingleCount(this.type,this.id,this.params)
         .then(function(res){
           self.count = res
         }).catch(function(err){
@@ -235,7 +235,7 @@
                         color: '#50ddbd'
                     }]
                 }
-        this.$service.warnsingleDay(this.type,this.params)
+        this.$service.warnsingleDay(this.type,this.id,this.params)
         .then(function(res){
           self.day_option.series=res
           self.day_option.series[0].color="#50ddbd"
@@ -246,7 +246,7 @@
       },
       getEvent(){
         let self = this
-        this.$service.warnsingleEvent(this.type,this.params)
+        this.$service.warnsingleEvent(this.type,this.id,this.params)
         .then(function(res){
           self.events=res
         }).catch(function(err){
