@@ -41,7 +41,7 @@
                 <router-link :to="{name: 'host_single', params: {id: item.ip}}" v-for="item in ItemsByFilter" :key="item.ip" class="col-lg-3 col-xs-12">
                     <div class="box box-solid">
                         <div class="box-header text-center">
-                            <h3 class="box-title text-ffffff">{{ item.ip }}</h3>
+                            <h3 class="box-title text-76d4f2">{{ item.ip }}</h3>
                         </div>
                         <div class="box-body">
                             <div class="is-progress">

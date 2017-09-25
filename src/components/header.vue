@@ -20,12 +20,12 @@
             </li>
             <li class="user-footer">
               <div class="pull-right">
-                <a href="javascript:;" onclick="logout" class="btn btn-default btn-flat">退出</a>
+                <a href="javascript:;" @click="logout" class="btn btn-default btn-flat">退出</a>
               </div>
             </li>
           </ul>
         </li>
-        <li>
+        <li v-show="this.$route.path.length>1">
           <div class="top-search-switch-btn">
           <input v-model='this.$store.state.isSearch' id="switch-size" type="checkbox" data-size="mini">
           </div>
@@ -36,10 +36,11 @@
 </header>
 </template>
 <script type="es6">
+  import axios from 'axios'
   export default { name: 'header',
     methods:{
       logout(){
-        this.$http.get('logout',{})
+        axios.get('/highdata/logout',{})
         .then(function (data) {
           this.$router.push({ path: '/login' })
         })

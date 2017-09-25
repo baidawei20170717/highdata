@@ -24,16 +24,16 @@ module.exports = {
   dev: {
     env: require('./dev.env'),
     port: 5000,
-    host: '10.1.4.9',
+    host: 'localhost',
     autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/highdata': {
+      '/api': {
         target: 'http://www.david.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/highdata': '/highdata'
+          '^/api': '/api'
         }
       }
     },

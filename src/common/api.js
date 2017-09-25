@@ -22,6 +22,7 @@ function checkStatus (response) {
   //   status: -404,
   //   msg: '网络异常'
   // }
+  
   location.href='/login'
 }
 //检查状态码
@@ -37,7 +38,7 @@ export default {
     return axios({
       method: 'post',
       // baseURL: '/api/',
-      baseURL: '/highdata/',
+      baseURL: '/api/',
       url,
       data: data,
       timeout: 100000,

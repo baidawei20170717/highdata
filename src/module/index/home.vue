@@ -42,10 +42,10 @@
     },
     methods:{
       topo(list){
-        return this.$http.post('main/content/topo',list)
+        return this.$http.post('main/content/topo.json',list)
       },
       topoSingle(params){
-        return this.$http.post('main/content/topo/single',params)
+        return this.$http.post('main/content/toposingle.json',params)
       },
       initData(){
         let self = this
