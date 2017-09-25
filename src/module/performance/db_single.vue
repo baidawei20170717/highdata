@@ -200,7 +200,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日链接数趋势',
+                        text: '当天数据库命令执行趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -215,14 +215,11 @@
                         }
                     },
                     xAxis: {
-                        // categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        // tickmarkPlacement: 'on',
-                        // title: {
-                        //     enabled: false
-                        // },
-                        // labels: {
-                        //     enabled: false //不显示横坐标
-                        // }
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
 
                       type: 'datetime',
                       dateTimeLabelFormats: {
@@ -241,10 +238,10 @@
                             text: ''
                         },
                         labels: {
-                            // formatter: function() {
-                            //     // return this.value;
-                            //     return '<div style="color:#fff">' + this.value + '</div>'
-                            // }
+                            formatter: function() {
+                                // return this.value;
+                                return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
+                            }
                         },
                         gridLineColor: '#333', //网格线样式
                         tickAmount: 7 //显示刻度数
@@ -264,34 +261,27 @@
                     plotOptions: {
                         area: {
                             stacking: 'normal',
-                            lineColor: '#fff',
+                            lineColor: '#ccc',
                             lineWidth: 1,
                             marker: {
-                                lineWidth: 1,
-                                lineColor: '#fff'
-                            }
+                    radius:1,
+                    lineWidth: 1,
+                    lineColor: '#fff'
+                }
                         }
                     },
-                    series: [{
-                        name: 'memory',
-                        data: [30, 30, 30, 40, 50, 60, 70],
-                        color: '#f7e011'
-                    }, {
-                        name: 'swap',
-                        data: [50, 15, 20, 30, 38, 30, 28],
-                        color: '#56c0e8'
-                    }]
+                    series: []
                 }
         this.$service.dbmysqlDay(this.ip,this.params)
         .then(function(res){
-          self.mysqlDay_option.series[0] = res
+          self.mysqlDay_option.series = res
           self.mysqlDay_option.series[0].color = '#53ddbf'
           self.mysqlDay_option.series[1].color = '#56c0e8'
           self.mysqlDay_option.series[2].color = '#facc2a'
           self.mysqlDay_option.series[3].color = '#ff6163'
           self.$refs.mysqlDay.CreateNow()
         }).catch(function(err){
-          console.log('获取当日数据库命令执行趋势失败!')
+          console.log('获取当天数据库命令执行趋势失败!')
         })
       },
       getMysqlConn(){
@@ -304,7 +294,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日链接数趋势',
+                        text: '当天链接数趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -319,18 +309,12 @@
                         }
                     },
                     xAxis: {
-
-                                            type: 'datetime',
-                                            dateTimeLabelFormats: {
-                                                millisecond: '%H:%M:%S.%L',
-                                                second: '%H:%M:%S',
-                                                minute: '%H:%M',
-                                                hour: '%H:%M',
-                                                day: '%m-%d',
-                                                week: '%m-%d',
-                                                month: '%Y-%m',
-                                                year: '%Y'
-                                            }
+                      type:'category',
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        }
                     },
                     yAxis: {
                         title: {
@@ -365,7 +349,7 @@
         this.$service.dbmysqlConn(this.ip,this.params)
         .then(function(res){
           self.mysqlConn_option.series = res
-          self.mysqlConn_option.series[0].color = '#f7e011'
+          self.mysqlConn_option.series[0].color = '#53ddbf'
           // self.mysqlConn_option.series[1].color = '#56c0e8'
           self.$refs.mysqlConn.CreateNow()
         }).catch(function(err){
@@ -382,7 +366,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日线控数趋势',
+                        text: '当天线控数趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -397,19 +381,17 @@
                         }
                     },
                     xAxis: {
-
-
-                                                                    type: 'datetime',
-                                                                    dateTimeLabelFormats: {
-                                                                        millisecond: '%H:%M:%S.%L',
-                                                                        second: '%H:%M:%S',
-                                                                        minute: '%H:%M',
-                                                                        hour: '%H:%M',
-                                                                        day: '%m-%d',
-                                                                        week: '%m-%d',
-                                                                        month: '%Y-%m',
-                                                                        year: '%Y'
-                                                                    }
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
+                          type:'category',
+                            labels: {
+                              style:{
+                                color:'#fff'
+                              }
+                            }
                     },
                     yAxis: {
                         title: {
@@ -444,7 +426,7 @@
         this.$service.dbmysqlThread(this.ip,this.params)
         .then(function(res){
           self.mysqlThread_option.series = res
-          self.mysqlThread_option.series[0].color = '#f7e011'
+          self.mysqlThread_option.series[0].color = '#56c0e8'
           // self.mysqlThread_option.series[1].color = '#56c0e8'
           self.$refs.mysqlThread.CreateNow()
         }).catch(function(err){
@@ -461,7 +443,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日打开表格趋势',
+                        text: '当天打开表格趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -476,17 +458,17 @@
                         }
                     },
                     xAxis: {
-                                                                type: 'datetime',
-                                                                dateTimeLabelFormats: {
-                                                                    millisecond: '%H:%M:%S.%L',
-                                                                    second: '%H:%M:%S',
-                                                                    minute: '%H:%M',
-                                                                    hour: '%H:%M',
-                                                                    day: '%m-%d',
-                                                                    week: '%m-%d',
-                                                                    month: '%Y-%m',
-                                                                    year: '%Y'
-                                                                }
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
+                          type:'category',
+                            labels: {
+                              style:{
+                                color:'#fff'
+                              }
+                            }
                     },
                     yAxis: {
                         title: {
@@ -521,7 +503,7 @@
         this.$service.dbmysqlOpenTable(this.ip,this.params)
         .then(function(res){
           self.mysqlOpenTableRand_option.series = res
-          self.mysqlOpenTableRand_option.series[0].color = '#f7e011'
+          self.mysqlOpenTableRand_option.series[0].color = '#53ddbf'
           // self.mysqlOpenTableRand_option.series[1].color = '#56c0e8'
           self.$refs.mysqlOpenTableRand.CreateNow()
         }).catch(function(err){
@@ -538,7 +520,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日打开文件趋势',
+                        text: '当天打开文件趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -553,17 +535,17 @@
                         }
                     },
                     xAxis: {
-                                                                type: 'datetime',
-                                                                dateTimeLabelFormats: {
-                                                                    millisecond: '%H:%M:%S.%L',
-                                                                    second: '%H:%M:%S',
-                                                                    minute: '%H:%M',
-                                                                    hour: '%H:%M',
-                                                                    day: '%m-%d',
-                                                                    week: '%m-%d',
-                                                                    month: '%Y-%m',
-                                                                    year: '%Y'
-                                                                }
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
+                          type:'category',
+                            labels: {
+                              style:{
+                                color:'#fff'
+                              }
+                            }
                     },
                     yAxis: {
                         title: {
@@ -598,7 +580,7 @@
         this.$service.dbmysqlOpenFile(this.ip,this.params)
         .then(function(res){
           self.mysqlOpenFileRand_option.series = res
-          self.mysqlOpenFileRand_option.series[0].color = '#f7e011'
+          self.mysqlOpenFileRand_option.series[0].color = '#56c0e8'
           // self.mysqlOpenFileRand_option.series[1].color = '#56c0e8'
           self.$refs.mysqlOpenFileRand.CreateNow()
         }).catch(function(err){
@@ -615,7 +597,7 @@
                         marginRight: 20
                     },
                     title: {
-                        text: '当日数据库命令执行趋势',
+                        text: '当天发送接收流量趋势',
                         align: 'left',
                         style: {
                             color: '#fff'
@@ -630,6 +612,11 @@
                         }
                     },
                     xAxis: {
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
                         type: 'datetime',
                         dateTimeLabelFormats: {
                             millisecond: '%H:%M:%S.%L',
@@ -647,10 +634,10 @@
                             text: ''
                         },
                         labels: {
-                            // formatter: function() {
-                            //     // return this.value;
-                            //     return '<div style="color:#fff">' + this.value + 'k</div>'
-                            // }
+                            formatter: function() {
+                                // return this.value;
+                                return '<div style="color:#fff">' + this.value/1000/1000 + 'M</div>'
+                            }
                         },
                         gridLineColor: '#333', //网格线样式
                         tickAmount: 7 //显示刻度数
@@ -670,12 +657,13 @@
                     plotOptions: {
                         area: {
                             stacking: 'normal',
-                            lineColor: '#fff',
+                            lineColor: '#ccc',
                             lineWidth: 1,
                             marker: {
-                                lineWidth: 1,
-                                lineColor: '#fff'
-                            }
+                    radius:1,
+                    lineWidth: 1,
+                    lineColor: '#fff'
+                }
                         }
                     },
                     series: []

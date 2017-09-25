@@ -194,14 +194,17 @@
                     }
                 },
                 xAxis: {
-                    categories: ['0', '4', '8', '12', '16', '20', '24'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
-                    labels: {
-                        enabled: false //不显示横坐标
+                  labels: {
+                    style:{
+                      color:'#fff'
                     }
+                  },
+                    type:'category',
+                      labels: {
+                        style:{
+                          color:'#fff'
+                        }
+                      }
                 },
                 yAxis: {
                     title: {
@@ -267,14 +270,22 @@
                     }
                 },
                 xAxis: {
-                    categories: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13','14','15','16','17','18','19','20','21','22','23'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
-                    labels: {
-                        enabled: false //不显示横坐标
+                  labels: {
+                    style:{
+                      color:'#fff'
                     }
+                  },
+                  type: 'datetime',
+                  dateTimeLabelFormats: {
+                      millisecond: '%H:%M:%S.%L',
+                      second: '%H:%M:%S',
+                      minute: '%H:%M',
+                      hour: '%H:%M',
+                      day: '%m-%d',
+                      week: '%m-%d',
+                      month: '%Y-%m',
+                      year: '%Y'
+                  },
                 },
                 yAxis: {
                     title: {
@@ -283,7 +294,7 @@
                     labels: {
                         formatter: function() {
                             // return this.value;
-                            return '<div style="color:#fff">' + this.value + 'k</div>'
+                            return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                         }
                     },
                     gridLineColor: '#333', //网格线样式
@@ -428,9 +439,9 @@
                     labels: {
                         formatter: function() {
                             // return this.value;
-                            return '<div style="color:#fff">' + this.value + 'k</div>'
+                            return '<div style="color:#fff">' + this.value + '</div>'
                         }
-                    },
+                    },gridLineColor: '#333', //网格线样式
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -517,9 +528,9 @@
                     labels: {
                         formatter: function() {
                             // return this.value;
-                            return '<div style="color:#fff">' + this.value + 'k</div>'
+                            return '<div style="color:#fff">' + this.value + '</div>'
                         }
-                    },
+                    },gridLineColor: '#333', //网格线样式
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -567,7 +578,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: '当日DDOS攻击类型统计',
+                    text: '当天受攻击端口TOP统计',
                     floating: true,
                     style: {
                         color: '#fff'

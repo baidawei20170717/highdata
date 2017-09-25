@@ -47,7 +47,7 @@
         <div class="item"><i class="fa fa-server text-52dabd" aria-hidden="true"></i>设备名称：{{basic.name}}</div>
       </div>
       <div class="col-lg-4 col-xs-6">
-        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>{{basic.type}}</div>
+        <div class="item"><i class="fa fa-database text-76d4f2" aria-hidden="true"></i>设备类型：{{basic.type}}</div>
       </div>
     </div>
     <div class="row">
@@ -61,7 +61,7 @@
             <br>
             <br>
             <br>
-            <p>当天请求总数</p>
+            <p>当天事件数</p>
             <p class="text-size60 text-76d4f2">{{count}}</p>
           </div>
         </div>
@@ -88,7 +88,7 @@
             <div class="box-body no-padding layer-mb20">
               <table class="table table-condensed">
                 <tr>
-                  <th style="width: 30%">时间</th>
+                  <th style="width: 180px">时间</th>
                   <th>事件</th>
                 </tr>
                 <tr v-for="item in lastEventByFilter">
@@ -163,7 +163,7 @@
         .then(function(res){
           self.count = res
         }).catch(function(err){
-          console.log('获取当日事件量失败!')
+          console.log('获取当天事件量失败!')
         })
       },
       getCountDay(){
@@ -176,7 +176,7 @@
                 marginRight: 20
             },
             title: {
-                text: '当日事件趋势',
+                text: '当天事件趋势',
                 align: 'left',
                 style: {
                     color: '#fff'
@@ -191,14 +191,17 @@
                 }
             },
             xAxis: {
-                categories: ['0', '4', '8', '12', '16', '20', '24'],
-                tickmarkPlacement: 'on',
-                title: {
-                    enabled: false
-                },
                 labels: {
-                    enabled: false //不显示横坐标
-                }
+                  style:{
+                    color:'#fff'
+                  }
+                },
+              type:'category',
+                    labels: {
+                      style: {
+                        color: '#fff'
+                      }
+                    }
             },
             yAxis: {
                 title: {

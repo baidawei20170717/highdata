@@ -176,14 +176,17 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
+                      labels: {
+                        style:{
+                          color:'#fff'
                         }
+                      },
+                        type:'category',
+                          labels: {
+                            style:{
+                              color:'#fff'
+                            }
+                          }
                     },
                     yAxis: {
                         title: {
@@ -237,7 +240,7 @@
                         marginTop:40
                     },
                 title: {
-                    text: '当天WAF攻击级别统计',
+                    text: '当天性能告警类型统计',
                     floating: true,
                     style: {
                         color: '#fff'
@@ -249,6 +252,7 @@
 
                 },
                 legend: {
+                  enabled:false,
                     layout:'vertical',
                     // align:'right',
                     // verticalAlign:'middle',
@@ -266,7 +270,7 @@
                         cursor: 'pointer',
                         showInLegend: true,
                         dataLabels: {
-                            enabled: false,
+                            enabled: true,
                             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                             style: {
                                 color: '#ffffff' || 'black'

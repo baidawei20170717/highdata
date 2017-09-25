@@ -22,7 +22,7 @@ function checkStatus (response) {
   //   status: -404,
   //   msg: '网络异常'
   // }
-  return 0
+  location.href='/login'
 }
 //检查状态码
 function checkCode (res) {

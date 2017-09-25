@@ -176,13 +176,16 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
+                    labels: {
+                      style:{
+                        color:'#fff'
+                      }
+                    },
+                      type:'category',
                         labels: {
-                            enabled: false //不显示横坐标
+                          style:{
+                            color:'#fff'
+                          }
                         }
                     },
                     yAxis: {

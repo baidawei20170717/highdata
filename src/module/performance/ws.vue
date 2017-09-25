@@ -44,14 +44,14 @@
         <router-link :to="{name: 'ws_single', params: {id: item.ip}}" v-for="item in ItemsByFilter" :key="item.ip" class="col-lg-3 col-xs-12">
           <div class="box box-solid">
             <div class="box-header text-center">
-              <h3 class="box-title text-ffffff">{{item.ip}}</h3>
-              <div class="text-ffffff text-size12">主机类型：{{item.type}} <br>占用内存：{{item.memory/1024/1024 | number(2)}}MB</div>
+              <h3 class="box-title text-76d4f2">{{item.ip}}</h3>
+              <div class="text-ffffff text-size12">主机类型：{{item.type}} 占用内存：{{item.memory/1024/1024 | number(2)}}MB</div>
             </div>
             <div class="box-body">
               <div class="is-progress">
                 <span class="label">CPU</span>
                 <div class="progress ">
-                  <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                  <div class="progress-bar progress-bar-red" :style="{'width':item.cpu*100+'%'}" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
                     <span class="sr-only">{{item.cpu * 100 | number }}% </span>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
               <div class="is-progress">
                 <span class="label">MEM</span>
                 <div class="progress">
-                  <div class="progress-bar progress-bar-green " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                  <div class="progress-bar progress-bar-green " :style="{'width':item.pct*100+'%'}" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                     <span class="sr-only">{{item.pct * 100 | number }}% </span>
                   </div>
                 </div>

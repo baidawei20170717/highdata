@@ -44,7 +44,7 @@
             <br>
             <br>
             <br>
-            <p>当天请求总数</p>
+            <p>当天windows事件量</p>
             <p class="text-size60 text-76d4f2">{{winCount}}</p>
           </div>
         </div>
@@ -91,7 +91,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-            <c-chart :id="winLevel_chart" :option="winLevel_option" ref="winLevel"></c-chart>
+            <x-chart :id="winLevel_chart" :option="winLevel_option" ref="winLevel"></x-chart>
           </div>
         </div>
       </div>
@@ -197,13 +197,16 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
+                    labels: {
+                      style:{
+                        color:'#fff'
+                      }
+                    },
+                      type:'category',
                         labels: {
-                            enabled: false //不显示横坐标
+                          style:{
+                            color:'#fff'
+                          }
                         }
                     },
                     yAxis: {
@@ -271,13 +274,16 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
+                    labels: {
+                      style:{
+                        color:'#fff'
+                      }
+                    },
+                      type:'category',
                         labels: {
-                            enabled: false //不显示横坐标
+                          style:{
+                            color:'#fff'
+                          }
                         }
                     },
                     yAxis: {
@@ -395,10 +401,10 @@
         .then(function(res){
           self.winLevel_option.series[0].data=res.log_name
           self.winLevel_option.series[1].data=res.level
-          self.winLevel_option.series[0].data[0].color="#fabd2a"
-          self.winLevel_option.series[0].data[1].color="#76d4f2"
+          self.winLevel_option.series[0].data[0].color="#76d4f2"
+          self.winLevel_option.series[0].data[1].color="#fabd2a"
           self.winLevel_option.series[0].data[2].color="#51d8bc"
-          self.winLevel_option.series[1].data[0].color="rgb(255,240,93)"
+          self.winLevel_option.series[1].data[0].color="#76d4f2"
           self.winLevel_option.series[1].data[1].color="rgb(255,223,76)"
           self.winLevel_option.series[1].data[2].color="rgb(255,206,59)"
           self.winLevel_option.series[1].data[3].color="rgb(169,255,255)"

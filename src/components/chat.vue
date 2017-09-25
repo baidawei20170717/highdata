@@ -19,10 +19,20 @@ export default {
     }
   },
   mounted() {
+     HighCharts.setOptions({
+                   global: {
+                       useUTC: false
+                   }
+            });
     HighCharts.chart(this.id,this.option)
   },
   methods:{
     CreateNow(){
+     HighCharts.setOptions({
+                   global: {
+                       useUTC: false
+                   }
+            });
       HighCharts.chart(this.id,this.option)
     }
   }

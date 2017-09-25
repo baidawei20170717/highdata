@@ -42,7 +42,7 @@
             <br>
             <br>
             <br>
-            <p>当天ddos事件总数</p>
+            <p>当天DDOS事件总数</p>
             <p class="text-size60 text-76d4f2">{{ddosCount}}</p>
           </div>
         </div>
@@ -194,14 +194,17 @@
                     }
                 },
                 xAxis: {
-                    categories: ['0', '4', '8', '12', '16', '20', '24'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
-                    labels: {
-                        enabled: false //不显示横坐标
-                    }
+                      labels: {
+                        style:{
+                          color:'#fff'
+                        }
+                      },
+                        type:'category',
+                          labels: {
+                            style:{
+                              color:'#fff'
+                            }
+                          }
                 },
                 yAxis: {
                     title: {
@@ -252,7 +255,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: '当日DDOS攻击类型统计',
+                    text: '当天DDOS攻击类型统计',
                     floating: true,
                     style: {
                         color: '#fff'
@@ -318,7 +321,7 @@
                 marginRight: 20
             },
             title: {
-                text: '当日客户端IP TOP统计',
+                text: '当天客户端IP TOP统计',
                 align: 'left',
                 x: 20,
                 y: 30,
@@ -357,9 +360,10 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value + '</div>'
                     }
                 },
+                gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',

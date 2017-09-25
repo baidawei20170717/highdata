@@ -216,7 +216,7 @@
           marginRight: 20
         },
         title: {
-          text: '当日CPU使用率趋势',
+          text: '当天CPU使用率趋势',
           align: 'left',
           style: {
             color: '#fff'
@@ -241,6 +241,11 @@
             week: '%m-%d',
             month: '%Y-%m',
             year: '%Y'
+          },
+          labels: {
+            style: {
+              color: '#fff'
+            }
           }
         },
         yAxis: {
@@ -287,7 +292,7 @@
         self.cpu_option.series[1].color = '#56c0e8'
         self.$refs.cpu_chart.CreateNow()
       }).catch(function(err){
-        console.log('获取当日cpu趋势失败!')
+        console.log('获取当天cpu趋势失败!')
       })
     },
     getMemDay(){
@@ -300,7 +305,7 @@
               marginRight: 20
           },
           title: {
-              text: '当日内存使用率趋势',
+              text: '当天内存使用率趋势',
               align: 'left',
               style: {
                   color: '#fff'
@@ -325,6 +330,11 @@
                     week: '%m-%d',
                     month: '%Y-%m',
                     year: '%Y'
+                },
+                labels: {
+                  style: {
+                    color: '#fff'
+                  }
                 }
           },
           yAxis: {
@@ -339,7 +349,6 @@
               gridLineColor: '#333', //网格线样式
               tickAmount: 7 //显示刻度数
           },
-          legend: {enabled: true },
           tooltip: {
                 dateTimeLabelFormats: {
                     millisecond: '%H:%M:%S.%L',
@@ -383,7 +392,7 @@
         self.memory_option.series[1].color = '#56c0e8'
         self.$refs.memory_chart.CreateNow()
       }).catch(function(err){
-        console.log('获取当日内存趋势失败!')
+        console.log('获取当天内存趋势失败!')
       })
     },
     getProcess(){

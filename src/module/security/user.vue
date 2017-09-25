@@ -44,17 +44,17 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="item">windows登录失败
+          <div class="item">WINDOWS登录失败
             <p class="text-size20 text-52dabd">{{count.win}}</p>
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="item">linux登录失败
+          <div class="item">LINUX登录失败
             <p class="text-size20 text-b288ff">{{count.linx}}</p>
           </div>
         </div>
         <div class="col-lg-3 col-xs-12">
-          <div class="item">vpn登录失败
+          <div class="item">VPN登录失败
             <p class="text-size20 text-f8cf61">{{count.vpn}}</p>
           </div>
         </div>
@@ -205,9 +205,9 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                     }
-                },
+                }, gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -294,9 +294,9 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value + '</div>'
                     }
-                },
+                }, gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -360,14 +360,17 @@
                     }
                 },
                 xAxis: {
-                    categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
-                    labels: {
-                        enabled: false //不显示横坐标
+                  labels: {
+                    style:{
+                      color:'#fff'
                     }
+                  },
+                    type:'category',
+                      labels: {
+                        style:{
+                          color:'#fff'
+                        }
+                      }
                 },
                 yAxis: {
                     title: {
@@ -443,14 +446,17 @@
                     }
                 },
                 xAxis: {
-                    categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
-                    labels: {
-                        enabled: false //不显示横坐标
+                  labels: {
+                    style:{
+                      color:'#fff'
                     }
+                  },
+                    type:'category',
+                      labels: {
+                        style:{
+                          color:'#fff'
+                        }
+                      }
                 },
                 yAxis: {
                     title: {

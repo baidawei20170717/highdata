@@ -1,14 +1,6 @@
 <template>
 <div class="content-wrapper">
-  <!-- <section class="content-header">
-    <h1>首页</h1>
-    <ol class="breadcrumb">
-      <li>
-        <router-link to="/"><i class="fa fa-dashboard"></i>首页</router-link>
-      </li>
-      <li class="active">首页</li>
-    </ol>
-  </section> -->
+  <big-dialog :node="dialogData"></big-dialog>
   <section class="content">
     <div class="row row-base-style">
       <div class="col-lg-12 col-xs-12"></div>
@@ -18,6 +10,8 @@
 </div>
 </template>
 <script type="es6">
+  import bigDialog from '@/components/dialog'
+  import _ from 'lodash'
   import go from 'gojs'
   import imgCloud from '../../svg/cloud.svg';
   import imgDdos from '../../svg/ddos.svg';
@@ -35,11 +29,26 @@
     beforeCreate (){
       document.body.setAttribute("class","hold-transition skin-blue sidebar-mini");
     },
+    data(){
+      return {
+          dialogData:{}
+      }
+    },
     mounted(){
       this.initData()
     },
+    components:{
+      bigDialog
+    },
     methods:{
+      topo(list){
+        return this.$http.post('main/content/topo',list)
+      },
+      topoSingle(params){
+        return this.$http.post('main/content/topo/single',params)
+      },
       initData(){
+        let self = this
         let scope = {}
         scope.images = {
             'cloud': imgCloud,
@@ -103,14 +112,14 @@
             //     return;
             // }
 
-            ContentService.topoSingle(node)
-                .then((res) => {
-                    scope.selectNode = _.defaults(res.data, node);
-                    $('#network-topo-single').modal();
-                })
-                .catch((err) => {
-                    toastr.error('获取设备数据失败!');
-                });
+            self.topoSingle(node)
+            .then((res) => {
+                self.dialogData = res
+                scope.selectNode = _.defaults(res, node);
+            })
+            .catch((err) => {
+                console.log('获取设备数据失败!');
+            });
         };
 
         //默认节点模板
@@ -535,24 +544,21 @@
                 return !_.isUndefined(item.ip);
             });
 
-            ContentService.topo(list)
-                .then((res) => {
-                    for (let i = 0; i < res.data.length; i++) {
-                        scope.refurbishNode(res.data[i]);
-                    }
-                    scope.myDiagram.rebuildParts();
-                })
-                .catch((err) => {
-                    toastr.error('获取拓扑数据失败!');
-                });
+            self.topo(list)
+            .then((res) => {
+                for (let i = 0; i < res.length; i++) {
+                    scope.refurbishNode(res[i]);
+                }
+                scope.myDiagram.rebuildParts();
+            })
+            .catch((err) => {
+                console.log('获取拓扑数据失败!');
+            });
+
         };
 
-        // scope.getTopo();
+        scope.getTopo();
         scope.loop();
-
-        // scope.$on('$destroy', function() {
-        //     scope.myDiagram.clear();
-        // });
       }
     }
   }

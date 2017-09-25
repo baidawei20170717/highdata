@@ -48,7 +48,7 @@
               <div class="is-progress">
                 <span class="label">CPU</span>
                 <div class="progress ">
-                  <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                  <div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" :style="{'width':item.cpu*100+'%'}">
                     <span class="sr-only">{{item.cpu * 100 | number }}% </span>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
               <div class="is-progress">
                 <span class="label">MEM</span>
                 <div class="progress">
-                  <div class="progress-bar progress-bar-green " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                  <div class="progress-bar progress-bar-green " role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="{'width':item.pct*100+'%'}">
                     <span class="sr-only">{{item.pct * 100 | number }}% </span>
                   </div>
                 </div>

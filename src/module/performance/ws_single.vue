@@ -138,13 +138,13 @@
           <div class="right-icon"></div>
           <div class="item ">
             <div class="box-header">
-              <h3 class="box-title">当日URL访问量 TOP统计</h3>
+              <h3 class="box-title">当天URL访问量 TOP统计</h3>
             </div>
             <div class="box-body no-padding layer-mb20">
               <table class="table table-condensed">
                 <tr>
                   <th style="width: 40px">序号</th>
-                  <th>url</th>
+                  <th>URL</th>
                   <th style="width: 70px">访问量</th>
                 </tr>
                 <tr v-for="(item,index) in requestTop">
@@ -163,14 +163,14 @@
           <div class="right-icon"></div>
           <div class="item ">
             <div class="box-header">
-              <h3 class="box-title">当日最耗流量URL TOP统计</h3>
+              <h3 class="box-title">当天最耗流量URL TOP统计</h3>
             </div>
             <div class="box-body no-padding layer-mb20">
               <table class="table table-condensed">
                 <tr>
                   <th style="width: 40px">序号</th>
-                  <th>url</th>
-                  <th style="width: 70px">访问量</th>
+                  <th>URL</th>
+                  <th style="width: 70px">字节大小</th>
                 </tr>
                 <tr v-for="(item,index) in byteTop">
                   <td>{{index+1}}</td>
@@ -256,7 +256,7 @@
         .then(function(res){
           self.count = res
         }).catch(function(err){
-          console.log('获取当日访问量失败!')
+          console.log('获取当天访问量失败!')
         })
       },
       getCountDay(){
@@ -269,7 +269,7 @@
                 marginRight: 20
             },
             title: {
-                text: '当日链接数趋势',
+                text: '当天链接数趋势',
                 align: 'left',
                 style: {
                     color: '#fff'
@@ -284,6 +284,11 @@
                 }
             },
             xAxis: {
+                labels: {
+                  style:{
+                    color:'#fff'
+                  }
+                },
                 type: 'datetime',
                 dateTimeLabelFormats: {
                     millisecond: '%H:%M:%S.%L',
@@ -340,7 +345,7 @@
           self.countDay_option.series[0].color = '#50ddbd'
           self.$refs.countDay.CreateNow()
         }).catch(function(err){
-          console.log('获取当日访问趋势失败!')
+          console.log('获取当天访问趋势失败!')
         })
       },
       getMethod(){
@@ -353,7 +358,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: '当日HTTP请求类型统计',
+                    text: '当天HTTP请求类型统计',
                     floating: true,
                     style: {
                         color: '#fff'
@@ -376,8 +381,14 @@
                             style: {
                                 color: '#ffffff' || 'black'
                             }
-                        }
+                        },
+                        showInLegend:true
                     }
+                },
+                legend:{
+                  itemStyle:{
+                    color:'#fff'
+                  }
                 },
                 series: [{
                     type: 'pie',
@@ -393,7 +404,7 @@
           // self.methodRand_option.series[0].data[2].color = '#818de8'
           self.$refs.methodRand.CreateNow()
         }).catch(function(err){
-          console.log('获取当日HTTP请求类型失败!')
+          console.log('获取当天HTTP请求类型失败!')
         })
       },
       getStatus(){
@@ -406,7 +417,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: '当日HTTP请求状态类型统计',
+                    text: '当天HTTP请求状态类型统计',
                     floating: true,
                     style: {
                         color: '#fff'
@@ -427,8 +438,14 @@
                             style: {
                                 color: '#ffffff' || 'black'
                             }
-                        }
+                        },
+                        showInLegend:true
                     }
+                },
+                legend:{
+                  itemStyle:{
+                    color:'#fff'
+                  }
                 },
                 series: [{
                     type: 'pie',
@@ -446,7 +463,7 @@
             // self.statusRand_option.series[0].data[4].color = '#e95658'
           self.$refs.statusRand.CreateNow()
         }).catch(function(err){
-          console.log('获取当日HTTP请求状态失败!')
+          console.log('获取当天HTTP请求状态失败!')
         })
       },
       getClientipTop(){
@@ -459,7 +476,7 @@
                     marginRight: 20
                 },
                 title: {
-                    text: '当日客户端IP TOP统计',
+                    text: '当天客户端IP TOP统计',
                     align: 'left',
                     x: 20,
                     y: 30,
@@ -497,10 +514,10 @@
                     },
                     labels: {
                         formatter: function() {
-                            // return this.value;
-                            return '<div style="color:#fff">' + this.value + 'k</div>'
+                            return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                         }
                     },
+                     gridLineColor: '#333', //网格线样式
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -535,7 +552,7 @@
           self.clientipTopRand_option.series[0].color = '#76d4f2'
           self.$refs.clientipTopRand.CreateNow()
         }).catch(function(err){
-          console.log('获取当日客户端IP TOP统计失败!')
+          console.log('获取当天客户端IP TOP统计失败!')
         })
       },
       getRequestTop(){
@@ -544,7 +561,7 @@
         .then(function(res){
           self.requestTop = res
         }).catch(function(err){
-          console.log('获取当日URL访问量TOP失败!')
+          console.log('获取当天URL访问量TOP失败!')
         })
       },
       getByteTop(){
@@ -553,7 +570,7 @@
         .then(function(res){
           self.byteTop = res
         }).catch(function(err){
-          console.log('获取当日最耗流量TOP失败!')
+          console.log('获取当天最耗流量TOP失败!')
         })
       },
       getFlowDay(){
@@ -566,7 +583,7 @@
                 marginRight: 20
             },
             title: {
-                text: '当日流量趋势',
+                text: '当天流量趋势',
                 align: 'left',
                 style: {
                     color: '#fff'
@@ -582,6 +599,11 @@
                 }
             },
             xAxis: {
+              labels:{
+                style:{
+                  color:'#fff'
+                }
+              },
               type: 'datetime',
               dateTimeLabelFormats: {
                   millisecond: '%H:%M:%S.%L',
@@ -598,12 +620,12 @@
                 title: {
                     text: ''
                 },
-                // labels: {
-                //     formatter: function() {
-                //         // return this.value;
-                //         return '<div style="color:#fff">' + this.value + '</div>'
-                //     }
-                // },
+                labels: {
+                    formatter: function() {
+                        // return this.value;
+                        return '<div style="color:#fff">' + this.value/1000/1000 + 'M</div>'
+                    }
+                },
                 gridLineColor: '#333', //网格线样式
                 tickAmount: 7 //显示刻度数
             },
@@ -647,7 +669,7 @@
           self.flowDayRand_option.series[0].color = '#76d4f2'
           self.$refs.flowDayRand.CreateNow()
         }).catch(function(err){
-          console.log('获取当日流量趋势失败')
+          console.log('获取当天流量趋势失败')
         })
       }
     },

@@ -10,6 +10,8 @@ body{background:url(../img/s-bg.jpg) center 0 no-repeat;background-size:cover;}
 .text-00b8ec{color: #00b8ec;}
 .text-b288ff{color: #b288ff;}
 .text-f8cf61{color:#f8cf61;}
+.text-danger{color:#f00 !important;}
+.text-success{color:#0f0  !important;}
 
 .text-size12{font-size: 12px;}
 .text-size14{font-size: 14px;}
@@ -69,9 +71,9 @@ body{background:url(../img/s-bg.jpg) center 0 no-repeat;background-size:cover;}
 .is-table-data .item .box-header{padding: 10px 0;}
 .is-table-data .item .box-title{color: #fff;}
 .is-table-data .item table td,
-.is-table-data .item table th{padding: 10px 5px;border-color: #2d5898;color: #fff;}
+.is-table-data .item table th{padding: 10px 5px;border-bottom:1px solid #2d5898;color: #fff;word-break:break-all;}
 .is-table-data .item table tr:first-child>*{border:none;}
-
+.is-table-data .item table tr:hover td{background:#173a7b;}
 
 /*搜索栏样式*/
 /*搜索栏样式*/

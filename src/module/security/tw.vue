@@ -73,7 +73,7 @@
       <div class="row-base-style">
         <div class="left-icon"></div>
         <div class="right-icon"></div>
-        <div class="title">当天资产事件统计top10</div>
+        <div class="title">当天资产事件统计TOP10</div>
         <div class="row">
           <div class="col-lg-3 col-xs-12" v-for="asset in assets">
             <div class="box box-solid">
@@ -164,13 +164,16 @@
                             color: '#fff'
                         }
                     },
-                    xAxis: {
-                        categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-                        crosshair: true,
+                    xAxis: {labels: {
+                      style:{
+                        color:'#fff'
+                      }
+                    },
+                      type:'category',
                         labels: {
-                            style: {
-                                color: '#fff'
-                            }
+                          style:{
+                            color:'#fff'
+                          }
                         }
                     },
                     yAxis: {
@@ -243,6 +246,11 @@
                         }
                     },
                     xAxis: {
+                        labels: {
+                          style:{
+                            color:'#fff'
+                          }
+                        },
                       type: 'datetime',
                       dateTimeLabelFormats: {
                           millisecond: '%H:%M:%S.%L',
@@ -260,10 +268,10 @@
                             text: ''
                         },
                         labels: {
-                            // formatter: function() {
-                            //     // return this.value;
-                            //     return '<div style="color:#fff">' + this.value + 'k</div>'
-                            // }
+                            formatter: function() {
+                                // return this.value;
+                                return '<div style="color:#fff">' + this.value/1000/1000 + 'M</div>'
+                            }
                         },
                         gridLineColor: '#333', //网格线样式
                         tickAmount: 7 //显示刻度数

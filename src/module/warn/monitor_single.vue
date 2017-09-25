@@ -42,7 +42,7 @@
       <div class="right-icon"></div>
       <div class="row">
         <div class="col-lg-6 col-xs-12">
-          <div class="item">规则标示： {{basic.id}} </div>
+          <div class="item">规则标识： {{basic.id}} </div>
         </div>
         <div class="col-lg-6 col-xs-12">
           <div class="item">规则名称： {{basic.name}} </div>
@@ -192,14 +192,17 @@
                         }
                     },
                     xAxis: {
-                        categories: ['0', '4', '8', '12', '16', '20', '24'],
-                        tickmarkPlacement: 'on',
-                        title: {
-                            enabled: false
-                        },
-                        labels: {
-                            enabled: false //不显示横坐标
+                      labels: {
+                        style:{
+                          color:'#fff'
                         }
+                      },
+                        type:'category',
+                          labels: {
+                            style:{
+                              color:'#fff'
+                            }
+                          }
                     },
                     yAxis: {
                         title: {

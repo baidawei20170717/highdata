@@ -63,7 +63,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-              <x-chart :id="wafAttackLevel_chart" :option="wafAttackLevel_option" ref="wafAttackLevel"></x-chart>
+              <c-chart :id="wafAttackLevel_chart" :option="wafAttackLevel_option" ref="wafAttackLevel"></c-chart>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-              <x-chart :id="ibmaType_chart" :option="ibmaType_option" ref="ibmaType"></x-chart>
+              <c-chart :id="ibmaType_chart" :option="ibmaType_option" ref="ibmaType"></c-chart>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@
           <div class="left-icon"></div>
           <div class="right-icon"></div>
           <div class="item">
-              <x-chart :id="wafDisportTop_chart" :option="wafDisportTop_option" ref="wafDisportTop"></x-chart>
+              <c-chart :id="wafDisportTop_chart" :option="wafDisportTop_option" ref="wafDisportTop"></c-chart>
           </div>
         </div>
       </div>
@@ -208,13 +208,16 @@
                     }
                 },
                 xAxis: {
-                    categories: ['0', '4', '8', '12', '16', '20', '24'],
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: false
-                    },
+                labels: {
+                  style:{
+                    color:'#fff'
+                  }
+                },
+                  type:'category',
                     labels: {
-                        enabled: false //不显示横坐标
+                      style:{
+                        color:'#fff'
+                      }
                     }
                 },
                 yAxis: {
@@ -271,7 +274,6 @@
                 title: {
                     text: '当天WAF攻击级别统计',
                     floating: true,
-                    align:'left',
                     style: {
                         color: '#fff'
                     },
@@ -377,9 +379,9 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                     }
-                },
+                },	 gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -467,9 +469,9 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                     }
-                },
+                },	 gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -522,7 +524,6 @@
                 title: {
                     text: '当天上网行为协议类型统计',
                     floating: true,
-                    align:'left',
                     style: {
                         color: '#fff'
                     },
@@ -627,9 +628,9 @@
                 labels: {
                     formatter: function() {
                         // return this.value;
-                        return '<div style="color:#fff">' + this.value + 'k</div>'
+                        return '<div style="color:#fff">' + this.value/1000 + 'k</div>'
                     }
-                },
+                },	 gridLineColor: '#333', //网格线样式
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -682,7 +683,6 @@
                 title: {
                     text: '当天WAF攻击目标端口TOP统计',
                     floating: true,
-                    align:'left',
                     style: {
                         color: '#fff'
                     },
